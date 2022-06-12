@@ -1,0 +1,7 @@
+__mocks__
+coverage
+ios
+android
+.yarn
+.vscode
+.husky
