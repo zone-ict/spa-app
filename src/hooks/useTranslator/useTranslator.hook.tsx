@@ -24,6 +24,8 @@ export interface Lang extends DefaultLang, Indexable {
 
 // #endregion
 
+export type TranslatorType = ReturnType<typeof useTranslator>;
+
 export default function useTranslator(locales: Lang[] = localeConfig) {
   const currentLanguage = useSelector((state: RootState) => state.settings.currentLanguage);
 

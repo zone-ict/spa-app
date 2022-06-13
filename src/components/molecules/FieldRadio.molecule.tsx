@@ -1,8 +1,8 @@
-import { styled } from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 import { Radio, Text } from '../atoms';
 import { RadioProps } from '../atoms/Radio.atom';
 
-const Container = styled.button();
+const Container = styled.button(() => [tw`inline-flex space-x-4 items-center`]);
 
 type Props = RadioProps & {
   label?: string;
@@ -11,10 +11,10 @@ type Props = RadioProps & {
 
 function FieldRadio({ label, isSelected, onClick }: Props) {
   return (
-    <button type="button" onClick={onClick}>
+    <Container type="button" onClick={onClick}>
       <Radio isSelected={isSelected} />
-      <Text.Label>{label}</Text.Label>
-    </button>
+      <Text.Small tw="font-normal">{label}</Text.Small>
+    </Container>
   );
 }
 

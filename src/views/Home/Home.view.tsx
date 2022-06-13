@@ -1,4 +1,3 @@
-import { Button } from '../../components/atoms';
 import { BookingListItem } from '../../components/molecules';
 import { BottomBarMenus } from '../../components/molecules/BottomBar.molecule';
 import WithTopBottomBar from '../../components/templates/WithTopBottomBar.template';
@@ -7,7 +6,7 @@ import { formatDate } from '../../utils/helper.util';
 import useHomeViewModel from './Home.viewModel';
 
 export default function HomeView() {
-  const { counter, navigateToBookings } = useHomeViewModel();
+  const { navigateToBookings } = useHomeViewModel();
 
   return (
     <WithTopBottomBar
@@ -16,21 +15,6 @@ export default function HomeView() {
       activeMenu={BottomBarMenus.Workshops}
       pageTitle="Home"
     >
-      <div>Count:aa</div>
-      <div>{counter.count}</div>
-
-      <Button type="button" onClick={counter.increment}>
-        Increment
-      </Button>
-
-      <Button type="button" onClick={counter.decrement}>
-        Decrement
-      </Button>
-
-      <Button.Outlined type="button" onClick={counter.reset}>
-        Reset
-      </Button.Outlined>
-
       <BookingListItem
         date={formatDate(new Date())}
         location="Naha, Okinawa"
