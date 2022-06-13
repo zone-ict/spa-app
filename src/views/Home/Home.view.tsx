@@ -9,9 +9,8 @@ export default function HomeView() {
   const { counter } = useHomeViewModel();
 
   return (
-    <CenteredContent>
-      <h1>Home</h1>
-      <div>Count:</div>
+    <CenteredContent pageTitle="Home">
+      <div>Count:aa</div>
       <div>{counter.count}</div>
 
       <Button type="button" onClick={counter.increment}>
@@ -45,6 +44,78 @@ export default function HomeView() {
         location="Naha, Okinawa"
         status={BookingStatus.Cancelled}
         title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
+      />
+
+      <BookingListItem
+        date={formatDate(new Date())}
+        location="Naha, Okinawa"
+        status={BookingStatus.Completed}
+        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
+        rating={4}
+      />
+
+      <BookingListItem
+        date={formatDate(new Date())}
+        location="Naha, Okinawa"
+        status={BookingStatus.Completed}
+        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
+        rating={4}
+      />
+
+      <BookingListItem
+        date={formatDate(new Date())}
+        location="Naha, Okinawa"
+        status={BookingStatus.Completed}
+        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
+        rating={4}
+      />
+
+      <BookingListItem
+        date={formatDate(new Date())}
+        location="Naha, Okinawa"
+        status={BookingStatus.Completed}
+        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
+        rating={4}
+      />
+
+      <BookingListItem
+        date={formatDate(new Date())}
+        location="Naha, Okinawa"
+        status={BookingStatus.Completed}
+        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
+        rating={4}
+      />
+
+      <BookingListItem
+        date={formatDate(new Date())}
+        location="Naha, Okinawa"
+        status={BookingStatus.Completed}
+        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
+        rating={4}
+      />
+
+      <BookingListItem
+        date={formatDate(new Date())}
+        location="Naha, Okinawa"
+        status={BookingStatus.Completed}
+        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
+        rating={4}
+      />
+
+      <BookingListItem
+        date={formatDate(new Date())}
+        location="Naha, Okinawa"
+        status={BookingStatus.Completed}
+        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
+        rating={4}
+      />
+
+      <BookingListItem
+        date={formatDate(new Date())}
+        location="Naha, Okinawa"
+        status={BookingStatus.Completed}
+        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
+        rating={4}
       />
 
       <BookingListItem
