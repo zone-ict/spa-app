@@ -10,8 +10,11 @@ type Props = TopBarProps & {
 
 function WithTopBar({ containerStyle, contentStyle, children, pageTitle, onBackClick }: Props) {
   return (
-    <div tw="flex justify-center" css={containerStyle}>
-      <div tw="flex flex-col max-w-md w-full" css={contentStyle}>
+    <div tw="flex justify-center bg-gray-100" css={containerStyle}>
+      <div
+        tw="flex flex-col max-w-md w-full h-full min-h-screen bg-white overflow-hidden"
+        css={contentStyle}
+      >
         <TopBar pageTitle={pageTitle} onBackClick={onBackClick} />
         <div tw="h-14" />
         {children}

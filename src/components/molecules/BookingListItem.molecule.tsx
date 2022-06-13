@@ -18,7 +18,7 @@ const mappedText: Record<BookingStatus, string> = {
   [BookingStatus.Cancelled]: 'Cancelled',
 };
 
-const Container = styled.div(() => [tw``]);
+const Container = styled.div(() => [tw`p-4 space-y-2 drop-shadow bg-white`]);
 
 const InfoContainer = styled.div(() => [tw``]);
 

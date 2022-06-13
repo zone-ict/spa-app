@@ -18,11 +18,15 @@ function WithTopBottomBar({
   onBackClick,
   activeMenu,
   onInactiveMenuClick,
+  hideBackButton,
 }: Props) {
   return (
-    <div tw="flex justify-center" css={containerStyle}>
-      <div tw="flex flex-col max-w-md w-full bg-white" css={contentStyle}>
-        <TopBar pageTitle={pageTitle} onBackClick={onBackClick} />
+    <div tw="flex justify-center bg-gray-100" css={containerStyle}>
+      <div
+        tw="flex flex-col max-w-md w-full h-full min-h-screen bg-white overflow-hidden"
+        css={contentStyle}
+      >
+        <TopBar hideBackButton={hideBackButton} pageTitle={pageTitle} onBackClick={onBackClick} />
         <div tw="h-14" />
         {children}
         <div tw="h-[60px]" />

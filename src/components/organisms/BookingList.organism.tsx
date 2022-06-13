@@ -1,36 +1,11 @@
-import { Button } from '../../components/atoms';
-import { BookingListItem } from '../../components/molecules';
-import { BottomBarMenus } from '../../components/molecules/BottomBar.molecule';
-import WithTopBottomBar from '../../components/templates/WithTopBottomBar.template';
 import { BookingStatus } from '../../constants/types.constant';
 import { formatDate } from '../../utils/helper.util';
-import useHomeViewModel from './Home.viewModel';
+import { BookingListItem } from '../molecules';
 
-export default function HomeView() {
-  const { counter, navigateToBookings } = useHomeViewModel();
-
+// TODO: Update this with data from BE
+function BookingList() {
   return (
-    <WithTopBottomBar
-      hideBackButton
-      onInactiveMenuClick={navigateToBookings}
-      activeMenu={BottomBarMenus.Workshops}
-      pageTitle="Home"
-    >
-      <div>Count:aa</div>
-      <div>{counter.count}</div>
-
-      <Button type="button" onClick={counter.increment}>
-        Increment
-      </Button>
-
-      <Button type="button" onClick={counter.decrement}>
-        Decrement
-      </Button>
-
-      <Button.Outlined type="button" onClick={counter.reset}>
-        Reset
-      </Button.Outlined>
-
+    <div>
       <BookingListItem
         date={formatDate(new Date())}
         location="Naha, Okinawa"
@@ -131,6 +106,8 @@ export default function HomeView() {
         title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
         rating={4}
       />
-    </WithTopBottomBar>
+    </div>
   );
 }
+
+export default BookingList;

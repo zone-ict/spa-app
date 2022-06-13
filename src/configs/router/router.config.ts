@@ -1,8 +1,7 @@
 import { RouteObject } from 'react-router-dom';
+import BookingsRoute from '../../views/Bookings/Bookings.route';
 import HomeRoute from '../../views/Home/Home.route';
 
-const baseRoute: RouteObject[] = [HomeRoute];
-
-const routerConfig: RouteObject[] = [...baseRoute];
+const routerConfig: RouteObject[] = [HomeRoute, BookingsRoute];
 
 export default routerConfig;

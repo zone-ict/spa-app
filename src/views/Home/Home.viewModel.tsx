@@ -1,4 +1,17 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import BookingsRoute from '../Bookings/Bookings.route';
+
+function useNavigationHandler() {
+  const navigate = useNavigate();
+
+  const navigateToBookings = useCallback(() => {
+    if (!BookingsRoute.path) return;
+    navigate(BookingsRoute.path);
+  }, [navigate]);
+
+  return { navigateToBookings };
+}
 
 function useCounter(initialValue = 0) {
   const [count, setCount] = useState(initialValue);
@@ -17,8 +30,10 @@ function useCounter(initialValue = 0) {
 
 export default function useHomeViewModel() {
   const counter = useCounter();
+  const { navigateToBookings } = useNavigationHandler();
 
   return {
     counter,
+    navigateToBookings,
   };
 }
