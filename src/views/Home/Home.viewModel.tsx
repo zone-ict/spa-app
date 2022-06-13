@@ -13,9 +13,7 @@ function useCounter(initialValue = 0) {
       signInOptions: [
         fbAuth.EmailAuthProvider.PROVIDER_ID,
         fbAuth.GoogleAuthProvider.PROVIDER_ID,
-        fbAuth.FacebookAuthProvider.PROVIDER_ID,
-        fbAuth.TwitterAuthProvider.PROVIDER_ID,
-        fbAuth.GithubAuthProvider.PROVIDER_ID,
+        'apple.com',
       ],
       signInSuccessUrl: '/',
       callbacks: {
@@ -26,7 +24,7 @@ function useCounter(initialValue = 0) {
     });
   };
   const logout = () => {
-    fbConfig.fbauth
+    fbConfig.fbAuth
       .signOut()
       .then(() => {
         //

@@ -6,7 +6,7 @@ import useHomeViewModel from './Home.viewModel';
 
 export default function HomeView() {
   const { counter } = useHomeViewModel();
-  const [user /** , loading, error */] = useAuthState(fbConfig.fbauth);
+  const [user /** , loading, error */] = useAuthState(fbConfig.fbAuth);
   return (
     <div>
       <h1>Home</h1>

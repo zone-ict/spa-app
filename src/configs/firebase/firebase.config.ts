@@ -2,8 +2,14 @@
 import { initializeApp } from 'firebase/app';
 // import { getAnalytics } from "firebase/analytics";
 import * as firebaseui from 'firebaseui';
+import 'firebaseui/dist/firebaseui.css';
 
-import { getAuth } from 'firebase/auth';
+import {
+  browserLocalPersistence,
+  initializeAuth,
+  indexedDBLocalPersistence,
+  debugErrorMap,
+} from 'firebase/auth';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -18,12 +24,16 @@ const firebaseConfig = {
 };
 
 const fbApp = initializeApp(firebaseConfig);
-const fbauth = getAuth(fbApp);
-const fbAuthUI = new firebaseui.auth.AuthUI(fbauth);
+const fbAuth = initializeAuth(fbApp, {
+  persistence: [indexedDBLocalPersistence, browserLocalPersistence],
+  errorMap: debugErrorMap,
+});
+
+const fbAuthUI = new firebaseui.auth.AuthUI(fbAuth);
 
 const fbConfig = {
   fbApp,
-  fbauth,
+  fbAuth,
   fbAuthUI,
 };
 
