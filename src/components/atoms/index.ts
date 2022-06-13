@@ -1,2 +1,4 @@
-export { default as Button } from './Button/Button.atom';
-export { default as Text } from './Text/Text.atom';
+export { default as Button } from './Button.atom';
+export { default as Chip } from './Chip.atom';
+export { default as InputText } from './InputText.atom';
+export { default as Text } from './Text.atom';

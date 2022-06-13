@@ -7,7 +7,7 @@ import localeConfig from '../../configs/locale/locale.config';
 
 export enum Availability {
   en = 'en',
-  id = 'id',
+  jp = 'jp',
 }
 
 type Indexable = {

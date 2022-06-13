@@ -20,9 +20,9 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { cleanup } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
-import apiService from '../../services/api/api.service';
-import { sessionReducer } from '../../stores/session/session.store';
-import { settingsReducer } from '../../stores/settings/settings.store';
+import apiService from '../services/api/api.service';
+import { sessionReducer } from '../stores/session/session.store';
+import { settingsReducer } from '../stores/settings/settings.store';
 
 interface StoreWrapperProps {
   children: React.ReactNode;
