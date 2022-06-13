@@ -1,6 +1,7 @@
 import { Button } from '../../components/atoms';
 import { BookingListItem } from '../../components/molecules';
-import CenteredContent from '../../components/templates/CenteredContent.template';
+import { BottomBarMenus } from '../../components/molecules/BottomBar.molecule';
+import WithTopBottomBar from '../../components/templates/WithTopBottomBar.template';
 import { BookingStatus } from '../../constants/types.constant';
 import { formatDate } from '../../utils/helper.util';
 import useHomeViewModel from './Home.viewModel';
@@ -9,7 +10,11 @@ export default function HomeView() {
   const { counter } = useHomeViewModel();
 
   return (
-    <CenteredContent pageTitle="Home">
+    <WithTopBottomBar
+      onInactiveMenuClick={() => console.log('navigate to bookings')}
+      activeMenu={BottomBarMenus.Workshops}
+      pageTitle="Home"
+    >
       <div>Count:aa</div>
       <div>{counter.count}</div>
 
@@ -125,6 +130,6 @@ export default function HomeView() {
         title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
         rating={4}
       />
-    </CenteredContent>
+    </WithTopBottomBar>
   );
 }

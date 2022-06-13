@@ -21,15 +21,13 @@ function TopBar({ onBackClick, pageTitle }: TopBarProps) {
   }, [canGoBack, navigate]);
 
   return (
-    <header tw="fixed inline-flex items-center space-x-4 p-4 bg-white w-full max-w-md box-shadow[0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3pxrgba(0, 0, 0, 0.1)]">
+    <header tw="fixed inline-flex items-center space-x-4 p-4 bg-white w-full max-w-md box-shadow[0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3pxrgba(0, 0, 0, 0.1)] z-50">
       {canGoBack && (
         <button type="button" onClick={onBackClick ?? goBack}>
           <img src={svgs.ArrowLeft} alt="Left Arrow" />
         </button>
       )}
-      <Text.HeadingFive tw="font-family[Arial, Helvetica, sans-serif]">
-        {pageTitle}
-      </Text.HeadingFive>
+      <Text.HeadingFive>{pageTitle}</Text.HeadingFive>
     </header>
   );
 }

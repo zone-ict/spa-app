@@ -6,6 +6,7 @@ const HeadingThree = tw.h3`text-2xl font-bold text-black`;
 const HeadingFour = tw.h4`text-xl font-bold text-black`;
 const HeadingFive = tw.h5`text-base font-medium text-gray-900`;
 const Body = tw.p`text-base text-black`;
+const Label = tw.div`text-xs font-medium text-gray-900`;
 
 export default Object.assign(Body, {
   HeadingOne,
@@ -13,4 +14,5 @@ export default Object.assign(Body, {
   HeadingThree,
   HeadingFour,
   HeadingFive,
+  Label,
 });

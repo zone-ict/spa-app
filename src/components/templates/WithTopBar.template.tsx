@@ -8,13 +8,7 @@ type Props = TopBarProps & {
   children?: React.ReactNode;
 };
 
-function CenteredContent({
-  containerStyle,
-  contentStyle,
-  children,
-  pageTitle,
-  onBackClick,
-}: Props) {
+function WithTopBar({ containerStyle, contentStyle, children, pageTitle, onBackClick }: Props) {
   return (
     <div tw="flex justify-center" css={containerStyle}>
       <div tw="flex flex-col max-w-md w-full" css={contentStyle}>
@@ -26,4 +20,4 @@ function CenteredContent({
   );
 }
 
-export default CenteredContent;
+export default WithTopBar;
