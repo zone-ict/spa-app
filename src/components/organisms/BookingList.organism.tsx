@@ -2,11 +2,16 @@ import { BookingStatus } from '../../constants/types.constant';
 import { formatDate } from '../../utils/helper.util';
 import { BookingListItem } from '../molecules';
 
-// TODO: Update this with data from BE
-function BookingList() {
+type Props = {
+  // TODO: Update this with data from BE
+  onItemClick?(): void;
+};
+
+function BookingList({ onItemClick }: Props) {
   return (
     <div>
       <BookingListItem
+        onClick={onItemClick}
         date={formatDate(new Date())}
         location="Naha, Okinawa"
         status={BookingStatus.InProgress}

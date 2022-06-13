@@ -4,7 +4,7 @@ import WithTopBottomBar from '../../components/templates/WithTopBottomBar.templa
 import useBookingsViewModel from './Bookings.viewModel';
 
 function Bookings() {
-  const { navigateToWorkshops } = useBookingsViewModel();
+  const { navigateToWorkshops, navigateToBookingDetails } = useBookingsViewModel();
 
   return (
     <WithTopBottomBar
@@ -13,7 +13,7 @@ function Bookings() {
       pageTitle="My Bookings"
       activeMenu={BottomBarMenus.Bookings}
     >
-      <BookingList />
+      <BookingList onItemClick={navigateToBookingDetails} />
     </WithTopBottomBar>
   );
 }
