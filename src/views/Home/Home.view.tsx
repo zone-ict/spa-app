@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useCollection } from 'react-firebase-hooks/firestore';
+import { collection } from 'firebase/firestore';
 import 'twin.macro';
 import { Button } from '../../components/atoms';
 import { BottomBarMenus } from '../../components/molecules/BottomBar.molecule';
@@ -14,7 +16,15 @@ export default function HomeView() {
   // TODO: Investigate what's causing this error
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const [user /** , loading, error */] = useAuthState(fbConfig.fbAuth);
-
+  const [items /** , , itemsLoading, itemsError */] = useCollection(
+    collection(fbConfig.fbDb, 'items'),
+    {
+      snapshotListenOptions: { includeMetadataChanges: true },
+    },
+  );
+  // useEffect(() => {
+  //   console.log('items=', {items, itemsLoading, itemsError})
+  // }, [items , itemsLoading, itemsError ])
   return (
     <WithTopBottomBar
       hideBackButton
@@ -30,6 +40,10 @@ export default function HomeView() {
       {/* TODO: Move this to Auth Page */}
       {!user && <div>Firebase LoggedOut</div>}
       {user && <div>Firebase LoggedIn: {user.displayName}</div>}
+
+      {items?.docs.map((item) => (
+        <span key={item.id}>Firestore items: {item.get('name')}</span>
+      ))}
 
       {/* this DIV for default login UI */}
       <div id="firebaseui-auth-container" />

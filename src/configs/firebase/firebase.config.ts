@@ -5,6 +5,8 @@
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+
 import {
   browserLocalPersistence,
   debugErrorMap,
@@ -32,6 +34,7 @@ const fbAuth = initializeAuth(fbApp, {
   persistence: [indexedDBLocalPersistence, browserLocalPersistence],
   errorMap: debugErrorMap,
 });
+const fbDb = getFirestore(fbApp);
 
 const fbAuthUI = new firebaseui.auth.AuthUI(fbAuth);
 
@@ -39,6 +42,7 @@ const fbConfig = {
   fbApp,
   fbAuth,
   fbAuthUI,
+  fbDb,
 };
 
 export default fbConfig;
