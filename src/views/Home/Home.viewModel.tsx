@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BookingsRoute from '../Bookings/Bookings.route';
 import WorkshopDetailsRoute from '../WorkshopDetails/WorkshopDetails.route';
@@ -11,6 +11,7 @@ function useNavigationHandler() {
     navigate(BookingsRoute.path);
   }, [navigate]);
 
+  // TODO: Add ID as params to be passed to the workshop details page
   const navigateToWorkshopDetails = useCallback(
     (id: string) => {
       if (!WorkshopDetailsRoute.path) return;
@@ -22,27 +23,8 @@ function useNavigationHandler() {
   return { navigateToBookings, navigateToWorkshopDetails };
 }
 
-function useCounter(initialValue = 0) {
-  const [count, setCount] = useState(initialValue);
-
-  const increment = () => setCount(count + 1);
-  const decrement = () => setCount(count - 1);
-  const reset = () => setCount(initialValue);
-
-  return {
-    count,
-    increment,
-    decrement,
-    reset,
-  };
-}
-
 export default function useHomeViewModel() {
-  const counter = useCounter();
-  const navigationHandler = useNavigationHandler();
+  const navigations = useNavigationHandler();
 
-  return {
-    counter,
-    ...navigationHandler,
-  };
+  return { ...navigations };
 }

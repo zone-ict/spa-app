@@ -1,19 +1,46 @@
+import React from 'react';
 import 'twin.macro';
-import { Workshop } from '../../models/Workshop.model';
-import { WorkshopItem } from '../molecules';
+import WorkshopListItem from '../molecules/WorkshopListItem.molecule';
 
 type Props = {
-  data: Workshop[];
+  // TODO: data from BE
   onItemClick?(id: string): void;
 };
 
-function WorkshopList({ data, onItemClick = () => {} }: Props) {
+const dummyData = [
+  {
+    id: '1',
+    image: 'https://via.placeholder.com/500',
+    name: 'Activity Provider Name - Two Line Example',
+  },
+  {
+    id: '2',
+    image: 'https://via.placeholder.com/500',
+    name: 'Activity Provider Name - Two Line Example',
+  },
+  {
+    id: '3',
+    image: 'https://via.placeholder.com/500',
+    name: 'Activity Provider Name - Two Line Example',
+  },
+  {
+    id: '4',
+    image: 'https://via.placeholder.com/500',
+    name: 'Activity Provider Name - Two Line Example',
+  },
+];
+
+function WorkshopList({ onItemClick = () => {} }: Props) {
   return (
-    <div tw="grid grid-cols-2 gap-4">
-      {data.map((item, index) => (
-        // TODO: Use id directly when we have data from FireStore
-        // eslint-disable-next-line react/no-array-index-key
-        <WorkshopItem key={index} data={item} onClick={onItemClick} />
+    <div tw="grid grid-cols-2 gap-4 p-4">
+      {/** TODO: replace dummy data */}
+      {dummyData.map((workshop) => (
+        <WorkshopListItem
+          key={workshop.id}
+          image={workshop.image}
+          name={workshop.name}
+          onClick={() => onItemClick(workshop.id)}
+        />
       ))}
     </div>
   );
