@@ -1,12 +1,71 @@
-import { BookingListItem } from '../../components/molecules';
+import 'twin.macro';
+import images from '../../assets/images';
 import { BottomBarMenus } from '../../components/molecules/BottomBar.molecule';
+import { WorkshopList } from '../../components/organisms';
 import WithTopBottomBar from '../../components/templates/WithTopBottomBar.template';
-import { BookingStatus } from '../../constants/types.constant';
-import { formatDate } from '../../utils/helper.util';
 import useHomeViewModel from './Home.viewModel';
 
+// TODO: Replace this with the data from FireStore
+const DUMMY_DATA = [
+  {
+    id: '1',
+    name: 'Workshop 1 Extra long straglafilcious name asdhasuhdauiosdh aiopsudhjaosiudh aisud aoiusdh aiusdh ioausd ',
+    photo: images.Placeholder,
+  },
+  {
+    id: '1',
+    name: 'Workshop 1',
+    photo: images.Placeholder,
+  },
+  {
+    id: '1',
+    name: 'Workshop 1',
+    photo: images.Placeholder,
+  },
+  {
+    id: '1',
+    name: 'Workshop 1',
+    photo: images.Placeholder,
+  },
+  {
+    id: '1',
+    name: 'Workshop 1',
+    photo: images.Placeholder,
+  },
+  {
+    id: '1',
+    name: 'Workshop 1',
+    photo: images.Placeholder,
+  },
+  {
+    id: '1',
+    name: 'Workshop 1',
+    photo: images.Placeholder,
+  },
+  {
+    id: '1',
+    name: 'Workshop 1',
+    photo: images.Placeholder,
+  },
+  {
+    id: '1',
+    name: 'Workshop 1',
+    photo: images.Placeholder,
+  },
+  {
+    id: '1',
+    name: 'Workshop 1',
+    photo: images.Placeholder,
+  },
+  {
+    id: '1',
+    name: 'Workshop 1',
+    photo: images.Placeholder,
+  },
+];
+
 export default function HomeView() {
-  const { navigateToBookings } = useHomeViewModel();
+  const { navigateToBookings, navigateToWorkshopDetails } = useHomeViewModel();
 
   return (
     <WithTopBottomBar
@@ -15,106 +74,9 @@ export default function HomeView() {
       activeMenu={BottomBarMenus.Workshops}
       pageTitle="Home"
     >
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.InProgress}
-        title="Booking 1"
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.InProgress}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Cancelled}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
+      <div tw="p-4">
+        <WorkshopList onItemClick={navigateToWorkshopDetails} data={DUMMY_DATA} />
+      </div>
     </WithTopBottomBar>
   );
 }

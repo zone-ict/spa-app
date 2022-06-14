@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BookingsRoute from '../Bookings/Bookings.route';
+import WorkshopDetailsRoute from '../WorkshopDetails/WorkshopDetails.route';
 
 function useNavigationHandler() {
   const navigate = useNavigate();
@@ -10,7 +11,15 @@ function useNavigationHandler() {
     navigate(BookingsRoute.path);
   }, [navigate]);
 
-  return { navigateToBookings };
+  const navigateToWorkshopDetails = useCallback(
+    (id: string) => {
+      if (!WorkshopDetailsRoute.path) return;
+      navigate(WorkshopDetailsRoute.path.replace(':id', id));
+    },
+    [navigate],
+  );
+
+  return { navigateToBookings, navigateToWorkshopDetails };
 }
 
 function useCounter(initialValue = 0) {
@@ -30,10 +39,10 @@ function useCounter(initialValue = 0) {
 
 export default function useHomeViewModel() {
   const counter = useCounter();
-  const { navigateToBookings } = useNavigationHandler();
+  const navigationHandler = useNavigationHandler();
 
   return {
     counter,
-    navigateToBookings,
+    ...navigationHandler,
   };
 }

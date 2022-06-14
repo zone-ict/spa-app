@@ -892,13 +892,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@headlessui/react@npm:^1.6.2":
-  version: 1.6.2
-  resolution: "@headlessui/react@npm:1.6.2"
+"@headlessui/react@npm:^1.6.4":
+  version: 1.6.4
+  resolution: "@headlessui/react@npm:1.6.4"
   peerDependencies:
     react: ^16 || ^17 || ^18
     react-dom: ^16 || ^17 || ^18
-  checksum: 2d2437488d93d7ba77e43eb1041680fe377298b8c0ba1c749a12d8aea3edb4e04ab5782c8ce738f3e3b5b12cdac5543b5aacb203e33dbd708d280ded7311e92f
+  checksum: f24dd2f5bd4de5954b2fd40998627b58a650a874894a90f96320ae5bad1b961a140e85ce821b92dc8cbed0628523df57ae9533137467d867788eac907bd396d7
   languageName: node
   linkType: hard
 
@@ -3109,6 +3109,15 @@ __metadata:
     domelementtype: ^2.0.1
     entities: ^2.0.0
   checksum: 376344893e4feccab649a14ca1a46473e9961f40fe62479ea692d4fee4d9df1c00ca8654811a79c1ca7b020096987e1ca4fb4d7f8bae32c1db800a680a0e5d5e
+  languageName: node
+  linkType: hard
+
+"dom7@npm:^4.0.4":
+  version: 4.0.4
+  resolution: "dom7@npm:4.0.4"
+  dependencies:
+    ssr-window: ^4.0.0
+  checksum: b38604f74e915b4d05b6634f9ff239a708c468180f498a28ff67f2a61233697d9bd7192703b788a24541c3591e7f1a6e83a2cbf70bc871a85e033f82e19abc31
   languageName: node
   linkType: hard
 
@@ -6513,7 +6522,7 @@ __metadata:
     "@emotion/react": ^11.9.0
     "@emotion/serialize": ^1.0.3
     "@emotion/styled": ^11.8.1
-    "@headlessui/react": ^1.6.2
+    "@headlessui/react": ^1.6.4
     "@reduxjs/toolkit": ^1.8.1
     "@tailwindcss/line-clamp": ^0.4.0
     "@testing-library/jest-dom": ^5.16.4
@@ -6558,6 +6567,7 @@ __metadata:
     redux: ^4.2.0
     redux-logger: ^3.0.6
     redux-persist: ^6.0.0
+    swiper: ^8.2.4
     tailwindcss: ^3.0.24
     ts-node: ^10.8.0
     twin.macro: rc
@@ -7165,6 +7175,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ssr-window@npm:^4.0.0, ssr-window@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "ssr-window@npm:4.0.2"
+  checksum: df182600927f4f3225224cf8c02338ea637c9750519505bbfb9a9236741a2a7ec088386fb948bca7b447b8303d9109e7dc7672e3de041c79ac2a0e03665af7d2
+  languageName: node
+  linkType: hard
+
 "ssri@npm:^9.0.0":
   version: 9.0.0
   resolution: "ssri@npm:9.0.0"
@@ -7392,6 +7409,16 @@ __metadata:
   bin:
     svgo: ./bin/svgo
   checksum: 28a5680a61245eb4a1603bc03459095bb01ad5ebd23e95882d886c3c81752313c0a9a9fe48dd0bcbb9a27c52e11c603640df952971573b2b550d9e15a9ee6116
+  languageName: node
+  linkType: hard
+
+"swiper@npm:^8.2.4":
+  version: 8.2.4
+  resolution: "swiper@npm:8.2.4"
+  dependencies:
+    dom7: ^4.0.4
+    ssr-window: ^4.0.2
+  checksum: 7d144d70382caeb9e58a7cf8abfe5f1a0bbe2df68f01dcdb8d1cb1ab57fe7950fcfac0fa629465d094c179ce9b4cdc4d15f2d486e65875f739679505caeae745
   languageName: node
   linkType: hard
 
