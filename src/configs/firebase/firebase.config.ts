@@ -1,15 +1,19 @@
+// TODO: Investigate what's causing this error
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
+import {
+  browserLocalPersistence,
+  debugErrorMap,
+  indexedDBLocalPersistence,
+  initializeAuth,
+} from 'firebase/auth';
 // import { getAnalytics } from "firebase/analytics";
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
-
-import {
-  browserLocalPersistence,
-  initializeAuth,
-  indexedDBLocalPersistence,
-  debugErrorMap,
-} from 'firebase/auth';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional

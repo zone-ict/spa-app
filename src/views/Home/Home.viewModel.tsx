@@ -1,13 +1,36 @@
-import { useState } from 'react';
+// TODO: Investigate what's causing this error
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 import * as fbAuth from 'firebase/auth';
+import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import fbConfig from '../../configs/firebase/firebase.config';
+import BookingsRoute from '../Bookings/Bookings.route';
+import WorkshopDetailsRoute from '../WorkshopDetails/WorkshopDetails.route';
 
-function useCounter(initialValue = 0) {
-  const [count, setCount] = useState(initialValue);
+function useNavigationHandler() {
+  const navigate = useNavigate();
 
-  const increment = () => setCount(count + 1);
-  const decrement = () => setCount(count - 1);
-  const reset = () => setCount(initialValue);
+  const navigateToBookings = useCallback(() => {
+    if (!BookingsRoute.path) return;
+    navigate(BookingsRoute.path);
+  }, [navigate]);
+
+  // TODO: Add ID as params to be passed to the workshop details page
+  const navigateToWorkshopDetails = useCallback(
+    (id: string) => {
+      if (!WorkshopDetailsRoute.path) return;
+      navigate(WorkshopDetailsRoute.path.replace(':id', id));
+    },
+    [navigate],
+  );
+
+  return { navigateToBookings, navigateToWorkshopDetails };
+}
+
+// TODO: Move this to Auth ViewModel
+function useFirebaseAuth() {
   const login = () => {
     fbConfig.fbAuthUI.start('#firebaseui-auth-container', {
       signInOptions: [
@@ -34,20 +57,12 @@ function useCounter(initialValue = 0) {
       });
   };
 
-  return {
-    count,
-    increment,
-    decrement,
-    reset,
-    login,
-    logout,
-  };
+  return { login, logout };
 }
 
 export default function useHomeViewModel() {
-  const counter = useCounter();
+  const navigations = useNavigationHandler();
+  const firebaseAuth = useFirebaseAuth();
 
-  return {
-    counter,
-  };
+  return { ...navigations, ...firebaseAuth };
 }

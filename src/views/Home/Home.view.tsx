@@ -1,34 +1,33 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import 'twin.macro';
 import { Button } from '../../components/atoms';
+import { BottomBarMenus } from '../../components/molecules/BottomBar.molecule';
+import { WorkshopList } from '../../components/organisms';
+import WithTopBottomBar from '../../components/templates/WithTopBottomBar.template';
 import fbConfig from '../../configs/firebase/firebase.config';
 import useHomeViewModel from './Home.viewModel';
 
 export default function HomeView() {
-  const { counter } = useHomeViewModel();
+  const { navigateToBookings, navigateToWorkshopDetails, login, logout } = useHomeViewModel();
+
+  // TODO: Investigate what's causing this error
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const [user /** , loading, error */] = useAuthState(fbConfig.fbAuth);
+
   return (
-    <div>
-      <h1>Home</h1>
-      <div>Count:</div>
-      <div>{counter.count}</div>
-
-      <Button type="button" onClick={counter.increment}>
-        Increment
-      </Button>
-
-      <Button type="button" onClick={counter.decrement}>
-        Decrement
-      </Button>
-
-      <Button.Outlined type="button" onClick={counter.reset}>
-        Reset
-      </Button.Outlined>
-
+    <WithTopBottomBar
+      hideBackButton
+      onInactiveMenuClick={navigateToBookings}
+      activeMenu={BottomBarMenus.Workshops}
+      pageTitle="Workshops"
+    >
+      <WorkshopList onItemClick={navigateToWorkshopDetails} />
       <br />
       <br />
       <br />
 
+      {/* TODO: Move this to Auth Page */}
       {!user && <div>Firebase LoggedOut</div>}
       {user && <div>Firebase LoggedIn: {user.displayName}</div>}
 
@@ -36,16 +35,16 @@ export default function HomeView() {
       <div id="firebaseui-auth-container" />
       <div>
         {!user && (
-          <Button.Outlined type="button" onClick={counter.login}>
+          <Button type="button" onClick={login}>
             Login
-          </Button.Outlined>
+          </Button>
         )}
         {user && (
-          <Button.Outlined type="button" onClick={counter.logout}>
+          <Button type="button" onClick={logout}>
             Logout
-          </Button.Outlined>
+          </Button>
         )}
       </div>
-    </div>
+    </WithTopBottomBar>
   );
 }

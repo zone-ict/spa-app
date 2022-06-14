@@ -7,7 +7,7 @@ import localeConfig from '../../configs/locale/locale.config';
 
 export enum Availability {
   en = 'en',
-  id = 'id',
+  jp = 'jp',
 }
 
 type Indexable = {
@@ -23,6 +23,8 @@ export interface Lang extends DefaultLang, Indexable {
 }
 
 // #endregion
+
+export type TranslatorType = ReturnType<typeof useTranslator>;
 
 export default function useTranslator(locales: Lang[] = localeConfig) {
   const currentLanguage = useSelector((state: RootState) => state.settings.currentLanguage);
