@@ -1,9 +1,9 @@
 import React from 'react';
-import ActivityListItem from '../molecules/ActivityListItem.molecule';
 import 'twin.macro';
+import ActivityListItem from '../molecules/ActivityListItem.molecule';
 
 type Props = {
-  onItemClick?(): void;
+  onItemClick?(id: string): void;
 };
 
 const dummyData = [

@@ -1,6 +1,10 @@
 import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ActivityDetailsRoute from '../ActivityDetails/ActivityDetails.route';
 
 function useNavigationHandler() {
+  const navigate = useNavigate();
+
   const goToMaps = () => {
     /** TODO */
   };
@@ -13,9 +17,13 @@ function useNavigationHandler() {
     /** TODO */
   };
 
-  const goToActivityDetail = useCallback(() => {
-    /** TODO */
-  }, []);
+  const goToActivityDetail = useCallback(
+    (id: string) => {
+      if (!ActivityDetailsRoute.path) return;
+      navigate(ActivityDetailsRoute.path.replace(':id', id));
+    },
+    [navigate],
+  );
 
   return {
     goToMaps,

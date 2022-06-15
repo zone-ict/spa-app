@@ -13,12 +13,13 @@ type Props = {
   name: string;
   avgRating: number;
   numRating: number;
-  onClick?(): void;
+  onClick?(id: string): void;
 };
 
-function ActivityListItem({ thumbnail, name, avgRating, numRating, onClick }: Props) {
+function ActivityListItem({ thumbnail, name, avgRating, numRating, onClick = () => {} }: Props) {
   return (
-    <Container onClick={onClick}>
+    // TODO: Pass id here
+    <Container onClick={() => onClick('1')}>
       <Thumbnail src={thumbnail} alt="Activity Thumbnail" />
       <div tw="flex flex-col space-y-2">
         <Text.Small>{name}</Text.Small>

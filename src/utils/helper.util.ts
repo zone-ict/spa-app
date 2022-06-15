@@ -38,3 +38,15 @@ export function formatDate(date: Date): string {
 export function isPartOfEnum<T>(value: T, enumType: object): value is T {
   return Object.values(enumType).includes(value);
 }
+
+/**
+ * Formats currency
+ * @param value Currency value to be formatted
+ * @returns Formatted text
+ */
+export function formatCurrency(value: number): string {
+  return new Intl.NumberFormat('ja-JP', {
+    style: 'currency',
+    currency: 'JPY',
+  }).format(value);
+}

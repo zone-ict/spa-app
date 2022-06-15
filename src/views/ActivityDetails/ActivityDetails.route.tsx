@@ -1,5 +1,5 @@
 import { RouteObject } from 'react-router-dom';
-import ActivityDetails from './ActivityDetail.view';
+import ActivityDetails from './ActivityDetails.view';
 
 const ActivityDetailsRoute: RouteObject = {
   path: '/activities/:id',
