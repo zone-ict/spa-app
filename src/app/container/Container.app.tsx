@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -7,15 +8,19 @@ import store, { persistor } from '../store/store.app';
 import ErrorBoundary from './ErrorBoundary.app';
 
 export default function Container() {
+  const [queryClient] = useState(new QueryClient());
+
   return (
     <ErrorBoundary>
-      <BrowserRouter>
-        <Provider store={store}>
-          <PersistGate persistor={persistor}>
-            <RouterApp />
-          </PersistGate>
-        </Provider>
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Provider store={store}>
+            <PersistGate persistor={persistor}>
+              <RouterApp />
+            </PersistGate>
+          </Provider>
+        </BrowserRouter>
+      </QueryClientProvider>
     </ErrorBoundary>
   );
 }

@@ -8,14 +8,21 @@ type Props = TopBarProps & {
   children?: React.ReactNode;
 };
 
-function WithTopBar({ containerStyle, contentStyle, children, pageTitle, onBackClick }: Props) {
+function WithTopBar({
+  containerStyle,
+  contentStyle,
+  children,
+  pageTitle,
+  onBackClick,
+  hideBackButton,
+}: Props) {
   return (
     <div tw="flex justify-center bg-gray-100" css={containerStyle}>
       <div
         tw="flex flex-col max-w-md w-full h-full min-h-screen bg-white overflow-hidden"
         css={contentStyle}
       >
-        <TopBar pageTitle={pageTitle} onBackClick={onBackClick} />
+        <TopBar pageTitle={pageTitle} onBackClick={onBackClick} hideBackButton={hideBackButton} />
         <div tw="h-14" />
         {children}
       </div>
