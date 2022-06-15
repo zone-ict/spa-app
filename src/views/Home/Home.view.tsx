@@ -11,7 +11,8 @@ import fbConfig from '../../configs/firebase/firebase.config';
 import useHomeViewModel from './Home.viewModel';
 
 export default function HomeView() {
-  const { navigateToBookings, navigateToWorkshopDetails, login, logout } = useHomeViewModel();
+  const { navigateToBookings, navigateToSettings, navigateToWorkshopDetails, login, logout } =
+    useHomeViewModel();
 
   // TODO: Investigate what's causing this error
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
@@ -28,7 +29,8 @@ export default function HomeView() {
   return (
     <WithTopBottomBar
       hideBackButton
-      onInactiveMenuClick={navigateToBookings}
+      onBookingsClicked={navigateToBookings}
+      onSettingsClicked={navigateToSettings}
       activeMenu={BottomBarMenus.Workshops}
       pageTitle="Workshops"
     >

@@ -4,6 +4,7 @@ import BookingCreateRoute from '../../views/BookingCreate/BookingCreate.route';
 import BookingDetailsRoute from '../../views/BookingDetails/BookingDetails.route';
 import BookingsRoute from '../../views/Bookings/Bookings.route';
 import HomeRoute from '../../views/Home/Home.route';
+import SettingsRoute from '../../views/Settings/Settings.route';
 import WorkshopDetailsRoute from '../../views/WorkshopDetails/WorkshopDetails.route';
 
 const routerConfig: RouteObject[] = [
@@ -13,6 +14,7 @@ const routerConfig: RouteObject[] = [
   WorkshopDetailsRoute,
   ActivityDetailsRoute,
   BookingCreateRoute,
+  SettingsRoute,
 ];
 
 export default routerConfig;

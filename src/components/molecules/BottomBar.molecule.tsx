@@ -1,3 +1,4 @@
+import { CogIcon } from '@heroicons/react/solid';
 import { useMemo } from 'react';
 import tw, { styled } from 'twin.macro';
 import svgs from '../../assets/svgs';
@@ -6,11 +7,14 @@ import { Text } from '../atoms';
 export enum BottomBarMenus {
   Workshops,
   Bookings,
+  Settings,
 }
 
 export type BottomBarProps = {
   activeMenu: BottomBarMenus;
-  onInactiveMenuClick(): void;
+  onWorkshopsClicked?(): void;
+  onBookingsClicked?(): void;
+  onSettingsClicked?(): void;
 };
 
 const FooterContainer = styled.footer(() => [
@@ -26,11 +30,16 @@ const BottomBarText = styled(Text.Label)<{ inactive?: boolean }>(({ inactive }) 
   inactive && tw`text-gray-400`,
 ]);
 
-function BottomBar({ activeMenu, onInactiveMenuClick }: BottomBarProps) {
+function BottomBar({
+  activeMenu,
+  onWorkshopsClicked,
+  onBookingsClicked,
+  onSettingsClicked,
+}: BottomBarProps) {
   const workshopsItem = useMemo(() => {
     const isActive = activeMenu === BottomBarMenus.Workshops;
     return (
-      <BottomBarItem type="button" onClick={isActive ? undefined : onInactiveMenuClick}>
+      <BottomBarItem type="button" onClick={isActive ? undefined : onWorkshopsClicked}>
         <BottomBarIcon
           src={isActive ? svgs.LocationMarker : svgs.LocationMarkerInactive}
           alt="Workshops Icon"
@@ -38,22 +47,33 @@ function BottomBar({ activeMenu, onInactiveMenuClick }: BottomBarProps) {
         <BottomBarText inactive={!isActive}>Workshops</BottomBarText>
       </BottomBarItem>
     );
-  }, [activeMenu, onInactiveMenuClick]);
+  }, [activeMenu, onWorkshopsClicked]);
 
   const bookingsItem = useMemo(() => {
     const isActive = activeMenu === BottomBarMenus.Bookings;
     return (
-      <BottomBarItem type="button" onClick={isActive ? undefined : onInactiveMenuClick}>
+      <BottomBarItem type="button" onClick={isActive ? undefined : onBookingsClicked}>
         <BottomBarIcon src={isActive ? svgs.Calendar : svgs.CalendarInactive} alt="Bookings Icon" />
         <BottomBarText inactive={!isActive}>Bookings</BottomBarText>
       </BottomBarItem>
     );
-  }, [activeMenu, onInactiveMenuClick]);
+  }, [activeMenu, onBookingsClicked]);
+
+  const settingsItem = useMemo(() => {
+    const isActive = activeMenu === BottomBarMenus.Settings;
+    return (
+      <BottomBarItem type="button" onClick={isActive ? undefined : onSettingsClicked}>
+        <CogIcon css={[tw`w-6 h-6`, isActive ? tw`text-gray-900` : tw`text-gray-400`]} />
+        <BottomBarText inactive={!isActive}>Settings</BottomBarText>
+      </BottomBarItem>
+    );
+  }, [activeMenu, onSettingsClicked]);
 
   return (
     <FooterContainer>
       {workshopsItem}
       {bookingsItem}
+      {settingsItem}
     </FooterContainer>
   );
 }

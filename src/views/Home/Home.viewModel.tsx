@@ -7,6 +7,7 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import fbConfig from '../../configs/firebase/firebase.config';
 import BookingsRoute from '../Bookings/Bookings.route';
+import SettingsRoute from '../Settings/Settings.route';
 import WorkshopDetailsRoute from '../WorkshopDetails/WorkshopDetails.route';
 
 function useNavigationHandler() {
@@ -15,6 +16,11 @@ function useNavigationHandler() {
   const navigateToBookings = useCallback(() => {
     if (!BookingsRoute.path) return;
     navigate(BookingsRoute.path);
+  }, [navigate]);
+
+  const navigateToSettings = useCallback(() => {
+    if (!SettingsRoute.path) return;
+    navigate(SettingsRoute.path);
   }, [navigate]);
 
   // TODO: Add ID as params to be passed to the workshop details page
@@ -26,7 +32,7 @@ function useNavigationHandler() {
     [navigate],
   );
 
-  return { navigateToBookings, navigateToWorkshopDetails };
+  return { navigateToBookings, navigateToSettings, navigateToWorkshopDetails };
 }
 
 // TODO: Move this to Auth ViewModel
