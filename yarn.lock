@@ -1416,13 +1416,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@headlessui/react@npm:^1.6.4":
-  version: 1.6.4
-  resolution: "@headlessui/react@npm:1.6.4"
+"@headlessui/react@npm:insiders":
+  version: 0.0.0-insiders.f2fc6d8
+  resolution: "@headlessui/react@npm:0.0.0-insiders.f2fc6d8"
   peerDependencies:
     react: ^16 || ^17 || ^18
     react-dom: ^16 || ^17 || ^18
-  checksum: f24dd2f5bd4de5954b2fd40998627b58a650a874894a90f96320ae5bad1b961a140e85ce821b92dc8cbed0628523df57ae9533137467d867788eac907bd396d7
+  checksum: 75837d334ee338c04d968a965642e7fbd0104626903803625547861c71de725c8e3992692b83dc7269ec2f0bc0f9bd0445228ca4cb13c18886d8496fe8937f8c
+  languageName: node
+  linkType: hard
+
+"@heroicons/react@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "@heroicons/react@npm:1.0.6"
+  peerDependencies:
+    react: ">= 16"
+  checksum: 372b1eda3ce735ef069777bc96304f70de585ebb71a6d1cedc121bb695f9bca235619112e3ee14e8779e95a03096813cbbe3b755927a54b7580d1ce084fa4096
   languageName: node
   linkType: hard
 
@@ -1658,6 +1667,32 @@ __metadata:
   version: 1.1.0
   resolution: "@protobufjs/utf8@npm:1.1.0"
   checksum: f9bf3163d13aaa3b6f5e6fbf37a116e094ea021c0e1f2a7ccd0e12a29e2ce08dafba4e8b36e13f8ed7397e1591610ce880ed1289af4d66cf4ace8a36a9557278
+  languageName: node
+  linkType: hard
+
+"@reach/auto-id@npm:0.16.0":
+  version: 0.16.0
+  resolution: "@reach/auto-id@npm:0.16.0"
+  dependencies:
+    "@reach/utils": 0.16.0
+    tslib: ^2.3.0
+  peerDependencies:
+    react: ^16.8.0 || 17.x
+    react-dom: ^16.8.0 || 17.x
+  checksum: 80211f7db1c0e3b107e2c1d3fe8055e7e41d7399b51ff0da5f0c9df43d90b77aa4a31a896545c699f9629b3fbc3c762ee0518de70faf8112098886c6759d3f15
+  languageName: node
+  linkType: hard
+
+"@reach/utils@npm:0.16.0":
+  version: 0.16.0
+  resolution: "@reach/utils@npm:0.16.0"
+  dependencies:
+    tiny-warning: ^1.0.3
+    tslib: ^2.3.0
+  peerDependencies:
+    react: ^16.8.0 || 17.x
+    react-dom: ^16.8.0 || 17.x
+  checksum: 36bc0eb41a71798eb6186b23de265ba709e51dae5bf214fb8505c66bb3f2e6a41bb2401457350436ba89ca9e3a50f93a04fe7c33d15648ce11e568a85622d770
   languageName: node
   linkType: hard
 
@@ -7189,6 +7224,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-day-picker@npm:^8.0.7":
+  version: 8.0.7
+  resolution: "react-day-picker@npm:8.0.7"
+  dependencies:
+    "@reach/auto-id": 0.16.0
+  peerDependencies:
+    date-fns: ^2.28.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: b925269c1e9ddf3ed0894eb1845ecbdc62669872d9efd2be7959019ff24a9d74006316bd19c4e69c3d614cb99238fd3fa463c657722d88b922092142d98a5e01
+  languageName: node
+  linkType: hard
+
 "react-dom@npm:^18.0.0":
   version: 18.0.0
   resolution: "react-dom@npm:18.0.0"
@@ -7336,7 +7383,8 @@ __metadata:
     "@emotion/react": ^11.9.0
     "@emotion/serialize": ^1.0.3
     "@emotion/styled": ^11.8.1
-    "@headlessui/react": ^1.6.4
+    "@headlessui/react": insiders
+    "@heroicons/react": ^1.0.6
     "@reduxjs/toolkit": ^1.8.1
     "@tailwindcss/line-clamp": ^0.4.0
     "@testing-library/jest-dom": ^5.16.4
@@ -7377,6 +7425,7 @@ __metadata:
     msw: ^0.41.0
     prettier: ^2.6.2
     react: ^18.0.0
+    react-day-picker: ^8.0.7
     react-dom: ^18.0.0
     react-firebase-hooks: ^5.0.3
     react-redux: ^8.0.1
@@ -8385,7 +8434,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tiny-warning@npm:^1.0.2":
+"tiny-warning@npm:^1.0.2, tiny-warning@npm:^1.0.3":
   version: 1.0.3
   resolution: "tiny-warning@npm:1.0.3"
   checksum: da62c4acac565902f0624b123eed6dd3509bc9a8d30c06e017104bedcf5d35810da8ff72864400ad19c5c7806fc0a8323c68baf3e326af7cb7d969f846100d71
@@ -8583,7 +8632,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.1.0, tslib@npm:^2.3.1":
+"tslib@npm:^2.1.0, tslib@npm:^2.3.0, tslib@npm:^2.3.1":
   version: 2.4.0
   resolution: "tslib@npm:2.4.0"
   checksum: 8c4aa6a3c5a754bf76aefc38026134180c053b7bd2f81338cb5e5ebf96fefa0f417bff221592bf801077f5bf990562f6264fecbc42cd3309b33872cb6fc3b113

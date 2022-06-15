@@ -11,7 +11,14 @@ function Rating({ rating }: Props) {
     <div tw="inline-flex flex-row space-x-[5px]">
       {[1, 2, 3, 4, 5].map((rate) => {
         const isActive = rate <= rating;
-        return <img tw="w-4 h-4" src={isActive ? svgs.Star : svgs.StarGray} alt="Rating Item" />;
+        return (
+          <img
+            key={rate}
+            tw="w-4 h-4"
+            src={isActive ? svgs.Star : svgs.StarGray}
+            alt="Rating Item"
+          />
+        );
       })}
     </div>
   );

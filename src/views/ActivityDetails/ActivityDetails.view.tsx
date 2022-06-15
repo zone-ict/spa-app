@@ -32,22 +32,24 @@ const dummyActivities = [
 ];
 
 function ActivityDetails() {
-  useActivityDetailsViewModel();
+  const { navigateToCreateBooking } = useActivityDetailsViewModel();
 
   return (
     <WithTopBar pageTitle="Activity Detail">
       <Gallery>
         {/** TODO: replace dummy data */}
-        {dummyGallery.map((item) => {
+        {dummyGallery.map((item, index) => {
           if (item.type === 'video') {
             return (
-              <Video controls>
+              // TODO: Replace key with ID later
+              <Video key={item.url} controls>
                 <source src={item.url} type="video/mp4" />
                 Your browser does not support the video tag.
               </Video>
             );
           }
-          return <Image src={item.url} />;
+          // TODO: Replace key with ID Later
+          return <Image key={`${item.url}-${index.toString()}`} src={item.url} />;
         })}
       </Gallery>
 
@@ -64,7 +66,7 @@ function ActivityDetails() {
         <ReviewList />
       </Content>
       <FooterButtonContainer>
-        <Button>Book a Schedule</Button>
+        <Button onClick={() => navigateToCreateBooking('1')}>Book a Schedule</Button>
       </FooterButtonContainer>
     </WithTopBar>
   );
