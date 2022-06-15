@@ -1,6 +1,6 @@
 import 'twin.macro';
 import { Text } from '../../components/atoms';
-import { ActivityVariantSelect } from '../../components/molecules';
+import { ActivityVariantSelect, DatePicker } from '../../components/molecules';
 import { WithTopBar } from '../../components/templates';
 
 function ActivityInfo() {
@@ -23,6 +23,7 @@ export default function BookingCreate() {
       <div tw="p-4">
         <ActivityInfo />
         <ActivityVariantSelect />
+        <DatePicker />
       </div>
     </WithTopBar>
   );
