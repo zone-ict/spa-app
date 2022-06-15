@@ -1,5 +1,6 @@
 import React from 'react';
 import 'twin.macro';
+import { WorkshopItem } from '../molecules';
 import WorkshopListItem from '../molecules/WorkshopListItem.molecule';
 
 type Props = {
@@ -10,22 +11,27 @@ type Props = {
 const dummyData = [
   {
     id: '1',
-    image: 'https://via.placeholder.com/500',
+    photo: 'https://via.placeholder.com/500x200',
     name: 'Activity Provider Name - Two Line Example',
   },
   {
     id: '2',
-    image: 'https://via.placeholder.com/500',
+    photo: 'https://via.placeholder.com/500',
     name: 'Activity Provider Name - Two Line Example',
   },
   {
     id: '3',
-    image: 'https://via.placeholder.com/500',
+    photo: 'https://via.placeholder.com/500',
     name: 'Activity Provider Name - Two Line Example',
   },
   {
     id: '4',
-    image: 'https://via.placeholder.com/500',
+    photo: 'https://via.placeholder.com/500',
+    name: 'Activity Provider Name - Two Line Example',
+  },
+  {
+    id: '5',
+    photo: 'https://via.placeholder.com/500',
     name: 'Activity Provider Name - Two Line Example',
   },
 ];
@@ -35,10 +41,13 @@ function WorkshopList({ onItemClick = () => {} }: Props) {
     <div tw="grid grid-cols-2 gap-4 p-4">
       {/** TODO: replace dummy data */}
       {dummyData.map((workshop) => (
-        <WorkshopListItem
+        <WorkshopItem
           key={workshop.id}
-          image={workshop.image}
-          name={workshop.name}
+          data={{
+            id: workshop.id,
+            name: workshop.name,
+            photo: workshop.photo,
+          }}
           onClick={() => onItemClick(workshop.id)}
         />
       ))}

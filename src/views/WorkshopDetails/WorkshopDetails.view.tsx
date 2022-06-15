@@ -1,3 +1,9 @@
+import {
+  ChevronRightIcon,
+  OfficeBuildingIcon,
+  PhoneIcon,
+  ShoppingBagIcon,
+} from '@heroicons/react/solid';
 import tw from 'twin.macro';
 import svgs from '../../assets/svgs';
 import { Text } from '../../components/atoms';
@@ -10,9 +16,9 @@ const Video = tw.video`h-[200px] bg-black`;
 const Image = tw.img`h-[200px]`;
 const Content = tw.div`flex flex-col p-4 pb-8 space-y-6`;
 const Description = tw(Text.Small)`text-gray-500`;
-const Contact = tw.div` space-y-4`;
-const Clickable = tw.div``;
-const Icon = tw.img`w-6 h-6`;
+const Contact = tw.div`flex flex-col`;
+const Clickable = tw.div`cursor-pointer`;
+const IconContainer = tw.div`w-5 h-5 flex-shrink-0 flex-grow-0 text-gray-400`;
 
 const dummyGallery = [
   {
@@ -27,12 +33,22 @@ const dummyGallery = [
   { type: 'image', url: 'https://via.placeholder.com/500' },
 ];
 
-function ContactItem({ icon, text, onClick }: { icon: string; text: string; onClick(): void }) {
+function ContactItem({
+  icon,
+  text,
+  onClick,
+}: {
+  icon: React.ReactNode;
+  text: string;
+  onClick(): void;
+}) {
   return (
-    <Clickable onClick={onClick} tw="flex items-center space-x-4">
-      <Icon src={icon} />
+    <Clickable onClick={onClick} tw="flex items-center space-x-4 py-2">
+      <IconContainer>{icon}</IconContainer>
       <Text.Small tw="flex-auto">{text}</Text.Small>
-      <Icon src={svgs.ChevronRight} />
+      <IconContainer>
+        <ChevronRightIcon tw="w-full h-full" />
+      </IconContainer>
     </Clickable>
   );
 }
@@ -64,12 +80,20 @@ function WorkshopDetails() {
         </Description>
         <Contact>
           <ContactItem
-            icon={svgs.OfficeBuilding}
+            icon={<OfficeBuildingIcon tw="w-full h-full" />}
             text="1 Lorem-23-4 Ipsum as Example Address, Lorem Ipsum, Dolor Sit Amet"
             onClick={goToMaps}
           />
-          <ContactItem icon={svgs.Phone} text="+81-00-000-00000" onClick={callWorkshop} />
-          <ContactItem icon={svgs.ShoppingBag} text="https://link.to.shop" onClick={goToLink} />
+          <ContactItem
+            icon={<PhoneIcon tw="w-full h-full" />}
+            text="+81-00-000-00000"
+            onClick={callWorkshop}
+          />
+          <ContactItem
+            icon={<ShoppingBagIcon tw="w-full h-full" />}
+            text="https://link.to.shop"
+            onClick={goToLink}
+          />
         </Contact>
         <hr />
         <Text.HeadingFive>Activities</Text.HeadingFive>

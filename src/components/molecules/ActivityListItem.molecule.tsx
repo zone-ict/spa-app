@@ -1,12 +1,13 @@
+import { ChevronRightIcon } from '@heroicons/react/solid';
 import React from 'react';
 import tw from 'twin.macro';
 import svgs from '../../assets/svgs';
 import { BookingRating } from '../../constants/types.constant';
 import { Rating, Text } from '../atoms';
 
-const Container = tw.div`flex items-center space-x-4`;
+const Container = tw.div`flex items-center space-x-4 cursor-pointer`;
 const Thumbnail = tw.img`w-20 flex-shrink-0 h-[70px] object-cover`;
-const Icon = tw.img`w-6 h-6`;
+const Icon = tw(ChevronRightIcon)`w-6 h-6 flex-shrink-0 text-gray-400`;
 
 type Props = {
   thumbnail: string;
@@ -30,7 +31,7 @@ function ActivityListItem({ thumbnail, name, avgRating, numRating, onClick = () 
           </Text.Label>
         </div>
       </div>
-      <Icon src={svgs.ChevronRight} />
+      <Icon />
     </Container>
   );
 }

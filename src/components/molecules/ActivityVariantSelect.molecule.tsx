@@ -32,10 +32,10 @@ export default function ActivityVariantSelect() {
           </Listbox.Button>
           <Transition
             as={Fragment}
-            enter={tw`transition ease-in duration-100`}
+            enter={tw`transition ease-in duration-200`}
             enterFrom={tw`opacity-0`}
             enterTo={tw`opacity-100`}
-            leave={tw`transition ease-in duration-100`}
+            leave={tw`transition ease-in duration-200`}
             leaveFrom={tw`opacity-100`}
             leaveTo={tw`opacity-0`}
           >
