@@ -1416,13 +1416,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@headlessui/react@npm:^1.6.4":
-  version: 1.6.4
-  resolution: "@headlessui/react@npm:1.6.4"
+"@headlessui/react@npm:insiders":
+  version: 0.0.0-insiders.f2fc6d8
+  resolution: "@headlessui/react@npm:0.0.0-insiders.f2fc6d8"
   peerDependencies:
     react: ^16 || ^17 || ^18
     react-dom: ^16 || ^17 || ^18
-  checksum: f24dd2f5bd4de5954b2fd40998627b58a650a874894a90f96320ae5bad1b961a140e85ce821b92dc8cbed0628523df57ae9533137467d867788eac907bd396d7
+  checksum: 75837d334ee338c04d968a965642e7fbd0104626903803625547861c71de725c8e3992692b83dc7269ec2f0bc0f9bd0445228ca4cb13c18886d8496fe8937f8c
+  languageName: node
+  linkType: hard
+
+"@heroicons/react@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "@heroicons/react@npm:1.0.6"
+  peerDependencies:
+    react: ">= 16"
+  checksum: 372b1eda3ce735ef069777bc96304f70de585ebb71a6d1cedc121bb695f9bca235619112e3ee14e8779e95a03096813cbbe3b755927a54b7580d1ce084fa4096
   languageName: node
   linkType: hard
 
@@ -7336,7 +7345,8 @@ __metadata:
     "@emotion/react": ^11.9.0
     "@emotion/serialize": ^1.0.3
     "@emotion/styled": ^11.8.1
-    "@headlessui/react": ^1.6.4
+    "@headlessui/react": insiders
+    "@heroicons/react": ^1.0.6
     "@reduxjs/toolkit": ^1.8.1
     "@tailwindcss/line-clamp": ^0.4.0
     "@testing-library/jest-dom": ^5.16.4

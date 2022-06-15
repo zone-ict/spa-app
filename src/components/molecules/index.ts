@@ -1,5 +1,6 @@
 export { default as ActivityListItem } from './ActivityListItem.molecule';
 export { default as ActivityTypeItem } from './ActivityTypeItem.molecule';
+export { default as ActivityVariantSelect } from './ActivityVariantSelect.molecule';
 export { default as BookingListItem } from './BookingListItem.molecule';
 export { default as BottomBar } from './BottomBar.molecule';
 export { default as FieldRadio } from './FieldRadio.molecule';

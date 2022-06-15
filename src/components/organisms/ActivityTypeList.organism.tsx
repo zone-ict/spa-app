@@ -19,7 +19,11 @@ export default function ActivityTypeList({ data }: Props) {
       {/* Probably just pass the selected ID from parent */}
       <div tw="space-y-2">
         {data.map((item) => (
-          <ActivityTypeItem name={item.name} price={item.price} />
+          <ActivityTypeItem
+            key={`${item.name}-${item.price}`}
+            name={item.name}
+            price={item.price}
+          />
         ))}
       </div>
     </div>
