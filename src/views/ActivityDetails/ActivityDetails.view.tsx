@@ -1,5 +1,6 @@
+import React from 'react';
 import tw from 'twin.macro';
-import { Button, Text } from '../../components/atoms';
+import { Button, Skeleton, Text } from '../../components/atoms';
 import { RatingWithAverage } from '../../components/molecules';
 import { ActivityTypeList, ReviewList } from '../../components/organisms';
 import WithTopBar from '../../components/templates/WithTopBar.template';
@@ -34,6 +35,23 @@ const dummyActivities = [
 function ActivityDetails() {
   const { navigateToCreateBooking } = useActivityDetailsViewModel();
 
+  if (false) {
+    return (
+      <WithTopBar pageTitle="Workshop Detail">
+        <Skeleton tw="h-[200px]" />
+        <Content>
+          <Skeleton tw="h-7 w-3/4" />
+          <Skeleton tw="h-4" />
+          <Skeleton tw="h-20" />
+          <hr />
+          <ActivityTypeList />
+          <hr />
+          <ReviewList />
+        </Content>
+      </WithTopBar>
+    );
+  }
+
   return (
     <WithTopBar pageTitle="Activity Detail">
       <Gallery>
@@ -63,7 +81,7 @@ function ActivityDetails() {
         <hr />
         <ActivityTypeList data={dummyActivities} />
         <hr />
-        <ReviewList />
+        <ReviewList data={[]} />
       </Content>
       <FooterButtonContainer>
         <Button onClick={() => navigateToCreateBooking('1')}>Book a Schedule</Button>

@@ -1,7 +1,7 @@
 import { OfficeBuildingIcon, PhoneIcon, ShoppingBagIcon } from '@heroicons/react/outline';
 import { ChevronRightIcon } from '@heroicons/react/solid';
 import tw from 'twin.macro';
-import { Text } from '../../components/atoms';
+import { Skeleton, Text } from '../../components/atoms';
 import { ActivityList } from '../../components/organisms';
 import WithTopBar from '../../components/templates/WithTopBar.template';
 import useWorkshopDetailsViewModel from './WorkshopDetails.viewModel';
@@ -21,8 +21,8 @@ function ContactItem({
   onClick,
 }: {
   icon: React.ReactNode;
-  text: string;
-  onClick(): void;
+  text: React.ReactNode;
+  onClick?(): void;
 }) {
   return (
     <Clickable onClick={onClick} tw="flex items-center space-x-4 py-2">
@@ -41,7 +41,29 @@ function WorkshopDetails() {
 
   if (workshopIsLoading || !workshopData) {
     // TODO: Add loading skeleton
-    return <WithTopBar pageTitle="Workshop Detail">Loading...</WithTopBar>;
+    return (
+      <WithTopBar pageTitle="Workshop Detail">
+        <Skeleton tw="h-[200px]" />
+        <Content>
+          <Skeleton tw="h-7 w-3/4" />
+          <Skeleton tw="h-20" />
+          <Contact>
+            <ContactItem
+              icon={<OfficeBuildingIcon tw="w-full h-full" />}
+              text={<Skeleton tw="h-5" />}
+            />
+            <ContactItem icon={<PhoneIcon tw="w-full h-full" />} text={<Skeleton tw="h-5" />} />
+            <ContactItem
+              icon={<ShoppingBagIcon tw="w-full h-full" />}
+              text={<Skeleton tw="h-5" />}
+            />
+          </Contact>
+          <hr />
+          <Text.HeadingFive>Activities</Text.HeadingFive>
+          <ActivityList />
+        </Content>
+      </WithTopBar>
+    );
   }
 
   return (

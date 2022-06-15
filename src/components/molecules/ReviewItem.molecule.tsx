@@ -1,10 +1,10 @@
 import 'twin.macro';
-import { BookingRating } from '../../constants/types.constant';
+import { ReviewRating } from '../../models/Review.model';
 import { Rating, Text } from '../atoms';
 
 type Props = {
   date: string;
-  rating: BookingRating;
+  rating: ReviewRating;
   comment?: string;
 };
 

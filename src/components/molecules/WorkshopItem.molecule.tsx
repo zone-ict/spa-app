@@ -9,9 +9,13 @@ type Props = {
 
 function WorkshopItem({ data, onClick = () => {} }: Props) {
   return (
-    <button type="button" tw="space-y-2 inline-flex flex-col" onClick={() => onClick(data.id)}>
-      <img tw="h-[20vh] w-full object-cover" src={data.photo} alt={`Workshop ${data.name}`} />
-      <Text.Small tw="display[-webkit-box] -webkit-line-clamp[2] -webkit-box-orient[vertical] overflow-hidden">
+    <button type="button" tw="space-y-2 inline-flex flex-col" onClick={() => onClick(data.uid)}>
+      <img
+        tw="h-[20vh] w-full object-cover"
+        src={data.main_photo_url}
+        alt={`Workshop ${data.name}`}
+      />
+      <Text.Small tw="display[-webkit-box] -webkit-line-clamp[2] -webkit-box-orient[vertical] overflow-hidden text-center">
         {data.name}
       </Text.Small>
     </button>

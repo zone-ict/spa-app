@@ -1,11 +1,12 @@
+import React from 'react';
 import 'twin.macro';
 import useTranslator from '../../hooks/useTranslator/useTranslator.hook';
-import { Text } from '../atoms';
+import { Skeleton, Text } from '../atoms';
 import { ActivityTypeItem } from '../molecules';
 
 // TODO: Update this to mirror FireStore Data
 type Props = {
-  data: Array<{ name: string; price: number }>;
+  data?: Array<{ name: string; price: number }>;
 };
 
 export default function ActivityTypeList({ data }: Props) {
@@ -18,13 +19,20 @@ export default function ActivityTypeList({ data }: Props) {
       {/* TODO: Add logic to check whether the activity is selected */}
       {/* Probably just pass the selected ID from parent */}
       <div tw="space-y-2">
-        {data.map((item) => (
-          <ActivityTypeItem
-            key={`${item.name}-${item.price}`}
-            name={item.name}
-            price={item.price}
-          />
-        ))}
+        {!data && (
+          <>
+            <Skeleton tw="h-[60px]" />
+            <Skeleton tw="h-[60px]" />
+          </>
+        )}
+        {!!data &&
+          data?.map((item) => (
+            <ActivityTypeItem
+              key={`${item.name}-${item.price}`}
+              name={item.name}
+              price={item.price}
+            />
+          ))}
       </div>
     </div>
   );
