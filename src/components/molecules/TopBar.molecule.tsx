@@ -1,7 +1,7 @@
+import { ArrowLeftIcon } from '@heroicons/react/outline';
 import { useCallback, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import 'twin.macro';
-import svgs from '../../assets/svgs';
 import { Text } from '../atoms';
 
 export type TopBarProps = {
@@ -25,7 +25,7 @@ function TopBar({ onBackClick, pageTitle, hideBackButton }: TopBarProps) {
     if (hideBackButton) return null;
     return (
       <button type="button" onClick={onBackClick ?? goBack}>
-        <img src={svgs.ArrowLeft} alt="Left Arrow" />
+        <ArrowLeftIcon tw="w-5 h-5" />
       </button>
     );
   }, [goBack, hideBackButton, onBackClick]);

@@ -1,7 +1,6 @@
 import { ChevronRightIcon } from '@heroicons/react/solid';
 import React from 'react';
 import tw from 'twin.macro';
-import svgs from '../../assets/svgs';
 import { BookingRating } from '../../constants/types.constant';
 import { Rating, Text } from '../atoms';
 

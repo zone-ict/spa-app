@@ -1,11 +1,6 @@
-import {
-  ChevronRightIcon,
-  OfficeBuildingIcon,
-  PhoneIcon,
-  ShoppingBagIcon,
-} from '@heroicons/react/solid';
+import { OfficeBuildingIcon, PhoneIcon, ShoppingBagIcon } from '@heroicons/react/outline';
+import { ChevronRightIcon } from '@heroicons/react/solid';
 import tw from 'twin.macro';
-import svgs from '../../assets/svgs';
 import { Text } from '../../components/atoms';
 import { ActivityList } from '../../components/organisms';
 import WithTopBar from '../../components/templates/WithTopBar.template';
@@ -18,7 +13,7 @@ const Content = tw.div`flex flex-col p-4 pb-8 space-y-6`;
 const Description = tw(Text.Small)`text-gray-500`;
 const Contact = tw.div`flex flex-col`;
 const Clickable = tw.div`cursor-pointer`;
-const IconContainer = tw.div`w-5 h-5 flex-shrink-0 flex-grow-0 text-gray-400`;
+const IconContainer = tw.div`w-6 h-6 flex-shrink-0 flex-grow-0 text-gray-400`;
 
 const dummyGallery = [
   {

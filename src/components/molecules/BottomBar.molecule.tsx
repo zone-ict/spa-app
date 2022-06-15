@@ -1,7 +1,6 @@
-import { CogIcon } from '@heroicons/react/solid';
+import { CalendarIcon, CogIcon, LocationMarkerIcon } from '@heroicons/react/outline';
 import { useMemo } from 'react';
 import tw, { styled } from 'twin.macro';
-import svgs from '../../assets/svgs';
 import { Text } from '../atoms';
 
 export enum BottomBarMenus {
@@ -40,10 +39,7 @@ function BottomBar({
     const isActive = activeMenu === BottomBarMenus.Workshops;
     return (
       <BottomBarItem type="button" onClick={isActive ? undefined : onWorkshopsClicked}>
-        <BottomBarIcon
-          src={isActive ? svgs.LocationMarker : svgs.LocationMarkerInactive}
-          alt="Workshops Icon"
-        />
+        <LocationMarkerIcon css={[tw`w-6 h-6`, isActive ? tw`text-gray-900` : tw`text-gray-400`]} />
         <BottomBarText inactive={!isActive}>Workshops</BottomBarText>
       </BottomBarItem>
     );
@@ -53,7 +49,7 @@ function BottomBar({
     const isActive = activeMenu === BottomBarMenus.Bookings;
     return (
       <BottomBarItem type="button" onClick={isActive ? undefined : onBookingsClicked}>
-        <BottomBarIcon src={isActive ? svgs.Calendar : svgs.CalendarInactive} alt="Bookings Icon" />
+        <CalendarIcon css={[tw`w-6 h-6`, isActive ? tw`text-gray-900` : tw`text-gray-400`]} />
         <BottomBarText inactive={!isActive}>Bookings</BottomBarText>
       </BottomBarItem>
     );
