@@ -6,6 +6,7 @@ import * as fbAuth from 'firebase/auth';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import fbConfig from '../../configs/firebase/firebase.config';
+import AuthRoute from '../Auth/Auth.route';
 import BookingsRoute from '../Bookings/Bookings.route';
 import WorkshopDetailsRoute from '../WorkshopDetails/WorkshopDetails.route';
 
@@ -31,33 +32,20 @@ function useNavigationHandler() {
 
 // TODO: Move this to Auth ViewModel
 function useFirebaseAuth() {
-  const login = () => {
-    fbConfig.fbAuthUI.start('#firebaseui-auth-container', {
-      signInOptions: [
-        fbAuth.EmailAuthProvider.PROVIDER_ID,
-        fbAuth.GoogleAuthProvider.PROVIDER_ID,
-        'apple.com',
-      ],
-      signInSuccessUrl: '/',
-      callbacks: {
-        signInSuccessWithAuthResult: (/** result, redirectUrl */) =>
-          // console.log('logged IN', result)
-          true,
-      },
-    });
-  };
+  const navigate = useNavigate();
+
   const logout = () => {
     fbConfig.fbAuth
       .signOut()
       .then(() => {
-        //
+        if (AuthRoute.path) navigate(AuthRoute.path);
       })
       .catch(() => {
-        //
+        if (AuthRoute.path) navigate(AuthRoute.path);
       });
   };
 
-  return { login, logout };
+  return { logout };
 }
 
 export default function useHomeViewModel() {

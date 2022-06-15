@@ -3,7 +3,7 @@ import { RouteObject } from 'react-router-dom';
 import HomeView from './Home.view';
 
 const HomeRoute: RouteObject = {
-  path: '/',
+  path: '/home',
   element: <HomeView />,
 };
 
