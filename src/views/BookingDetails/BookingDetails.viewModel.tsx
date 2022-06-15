@@ -6,11 +6,16 @@ import { number, object, string } from 'yup';
 import { CancelBookingFormSchema } from '../../components/organisms/CancelBookingForm.organism';
 import { ReviewBookingFormSchema } from '../../components/organisms/ReviewBookingForm.organism';
 import useTranslator from '../../hooks/useTranslator/useTranslator.hook';
+import { Booking } from '../../models/Booking.model';
 import {
   cancelBooking,
   CancelBookingParams,
   getBookingByUid,
 } from '../../services/firebase/collections/bookings.collection';
+import {
+  createReview,
+  CreateReviewParams,
+} from '../../services/firebase/collections/reviews.collection';
 
 // #region STATE
 
@@ -105,12 +110,28 @@ function useCancelBookingFormHandler(onSubmit: (values: CancelBookingFormSchema)
 
 // #region REVIEW
 
-// TODO: Change to call FireStore service
-function useHandleSubmitReviewBooking(state: PageState) {
+function useHandleSubmitReviewBooking(state: PageState, booking?: Booking) {
+  const queryClient = useQueryClient();
+
+  const createReviewMutation = useMutation((params: CreateReviewParams) => createReview(params), {
+    onSuccess: async (_, params) => {
+      await queryClient.invalidateQueries(['bookings', params.booking_uid]);
+      state.updateState({
+        isReviewing: false,
+      });
+    },
+  });
+
   const handleSubmit = (values: ReviewBookingFormSchema) => {
-    state.updateState({
-      isReviewing: false,
-      review: values,
+    if (!booking) return;
+
+    createReviewMutation.mutate({
+      booking_uid: booking.uid,
+      activity_uid: booking.activity_uid,
+      comment: values.comment,
+      rating: values.rating,
+      user_uid: booking.user_uid,
+      workshop_uid: booking.workshop_uid,
     });
   };
 
@@ -155,7 +176,10 @@ export default function useBookingDetailsViewModel() {
   const cancelBookingFormHandler = useCancelBookingFormHandler(handleSubmitCancelBooking);
 
   // Review
-  const handleSubmitReviewBooking = useHandleSubmitReviewBooking(bookingDetailState);
+  const handleSubmitReviewBooking = useHandleSubmitReviewBooking(
+    bookingDetailState,
+    data.bookingData,
+  );
   const reviewBookingFormHandler = useReviewBookingFormHandler(handleSubmitReviewBooking);
 
   return {

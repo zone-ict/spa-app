@@ -39,8 +39,6 @@ export async function getBookingByUid(uid: string): Promise<Booking> {
   let reviewComment;
 
   if (bookingData.review_uid !== '' && bookingData.review_uid) {
-    console.log('getting review for', bookingData.review_uid);
-
     const review = await getReviewByUid(bookingData.review_uid);
     reviewRating = review.rating;
     reviewComment = review.comment;
