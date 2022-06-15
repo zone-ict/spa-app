@@ -1,7 +1,7 @@
 import React from 'react';
 import tw from 'twin.macro';
 import svgs from '../../assets/svgs';
-import { BookingRating } from '../../constants/types.constant';
+import { ReviewRating } from '../../models/Review.model';
 import { Rating, Text } from '../atoms';
 
 const Container = tw.div`flex items-center space-x-4`;
@@ -11,8 +11,8 @@ const Icon = tw.img`w-6 h-6`;
 type Props = {
   thumbnail: string;
   name: string;
-  avgRating: number;
-  numRating: number;
+  avgRating?: number;
+  numRating?: number;
   onClick?(id: string): void;
 };
 
@@ -21,12 +21,14 @@ function ActivityListItem({ thumbnail, name, avgRating, numRating, onClick = () 
     // TODO: Pass id here
     <Container onClick={() => onClick('1')}>
       <Thumbnail src={thumbnail} alt="Activity Thumbnail" />
-      <div tw="flex flex-col space-y-2">
+      <div tw="flex w-full flex-col space-y-2">
         <Text.Small>{name}</Text.Small>
         <div tw="flex items-center space-x-2">
-          <Rating rating={Math.floor(avgRating) as BookingRating} />
+          <Rating
+            rating={avgRating == null ? undefined : (Math.floor(avgRating) as ReviewRating)}
+          />
           <Text.Label tw="text-gray-500">
-            {avgRating} out of {numRating}
+            {avgRating ? `${avgRating} (${numRating ?? 0})` : 'No ratings yet'}
           </Text.Label>
         </div>
       </div>

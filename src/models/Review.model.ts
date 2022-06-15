@@ -1,4 +1,4 @@
-export type ReviewRating = 1 | 2 | 3 | 4 | 5;
+export type ReviewRating = 0 | 1 | 2 | 3 | 4 | 5;
 
 export interface Review {
   uid: string;

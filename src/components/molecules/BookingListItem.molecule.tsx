@@ -3,7 +3,8 @@
 import { useMemo } from 'react';
 import tw, { styled } from 'twin.macro';
 import assets from '../../assets';
-import { BookingRating, BookingStatus } from '../../constants/types.constant';
+import { BookingStatus } from '../../models/Booking.model';
+import { ReviewRating } from '../../models/Review.model';
 import Chip from '../atoms/Chip.atom';
 
 // #endregion
@@ -35,12 +36,13 @@ type Props = {
   date: string;
   location: string;
   status: BookingStatus;
-  rating?: BookingRating;
+  rating?: ReviewRating;
   // TODO: Update this to better mirror data from BE
   onClick?(): void;
 };
 
 const mappedText: Record<BookingStatus, string> = {
+  [BookingStatus.Booked]: 'Booked',
   [BookingStatus.InProgress]: 'In Progress',
   [BookingStatus.Completed]: 'Completed',
   [BookingStatus.Cancelled]: 'Cancelled',

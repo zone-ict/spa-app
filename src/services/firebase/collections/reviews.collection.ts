@@ -48,6 +48,8 @@ export async function getReviewsByActivityUid(activityUid: string): Promise<Revi
 
   return querySnapshot.docs.map((snapshot) => ({
     ...snapshot.data(),
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    rating: parseInt(snapshot.data().rating, 10),
     uid: snapshot.id,
   })) as Review[];
 }

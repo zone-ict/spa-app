@@ -10,6 +10,7 @@ export interface Activity {
   uid: string;
   name: string;
   workshop_uid: string;
+  thumbnail_url: string;
   gallery: GalleryItem[];
   reviews: unknown[];
   activity_types: ActivityType[];
