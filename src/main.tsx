@@ -6,8 +6,16 @@ import './index.css';
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <GlobalStyles />
-    <Container />
-  </React.StrictMode>,
+  // on DEV, StrictMode creates UI twice => ERROR
+  process.env.NODE_ENV === 'production' ? (
+    <React.StrictMode>
+      <GlobalStyles />
+      <Container />
+    </React.StrictMode>
+  ) : (
+    <>
+      <GlobalStyles />
+      <Container />
+    </>
+  ),
 );
