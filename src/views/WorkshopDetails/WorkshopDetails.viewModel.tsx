@@ -5,7 +5,7 @@ import { Workshop } from '../../models/Workshop.model';
 import { getWorkshopDetail } from '../../services/firebase/collections/workshops.collection';
 import ActivityDetailsRoute from '../ActivityDetails/ActivityDetails.route';
 
-function useDataFetching() {
+function useData() {
   const { pathname } = useLocation();
 
   const workshopUid = pathname.split('/')[2];
@@ -17,7 +17,7 @@ function useDataFetching() {
   return { workshopData: data, workshopIsLoading: isLoading };
 }
 
-function useNavigationHandler(workshopData: Workshop | undefined) {
+function useNavigationHandlers(workshopData: Workshop | undefined) {
   const navigate = useNavigate();
 
   const goToMaps = () => {
@@ -37,10 +37,10 @@ function useNavigationHandler(workshopData: Workshop | undefined) {
 
   const goToActivityDetail = useCallback(
     (id: string) => {
-      if (!ActivityDetailsRoute.path) return;
+      if (!ActivityDetailsRoute.path || !workshopData) return;
       navigate(ActivityDetailsRoute.path.replace(':id', id));
     },
-    [navigate],
+    [navigate, workshopData],
   );
 
   return {
@@ -52,8 +52,8 @@ function useNavigationHandler(workshopData: Workshop | undefined) {
 }
 
 export default function useWorkshopDetailsViewModel() {
-  const data = useDataFetching();
-  const navigations = useNavigationHandler(data.workshopData);
+  const data = useData();
+  const navigationHandlers = useNavigationHandlers(data.workshopData);
 
-  return { ...navigations, ...data };
+  return { ...navigationHandlers, ...data };
 }

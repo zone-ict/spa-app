@@ -14,6 +14,7 @@ function ActivityList({ onItemClick, data }: Props) {
       {data.map((activity) => (
         <ActivityListItem
           key={activity.uid}
+          uid={activity.uid}
           thumbnail={activity.thumbnail_url}
           name={activity.name}
           avgRating={activity.average_rating ?? 0}

@@ -2,7 +2,7 @@ import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firesto
 import { ActivityType } from '../../../models/Activity.model';
 import { fbDb } from '../firebase.service';
 
-export const activitiesTypesRef = collection(fbDb, 'activities-types');
+export const activitiesTypesRef = collection(fbDb, 'activity-types');
 
 export async function getActivityTypesByActivityUid(activityUid: string): Promise<ActivityType[]> {
   const q = query(activitiesTypesRef, where('activity_uid', '==', activityUid));

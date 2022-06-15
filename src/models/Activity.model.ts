@@ -9,6 +9,7 @@ export interface ActivityType {
 export interface Activity {
   uid: string;
   name: string;
+  description: string;
   workshop_uid: string;
   thumbnail_url: string;
   gallery: GalleryItem[];

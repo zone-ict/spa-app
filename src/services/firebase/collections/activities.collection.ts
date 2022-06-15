@@ -2,6 +2,7 @@ import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firesto
 import { Activity } from '../../../models/Activity.model';
 import { fbDb } from '../firebase.service';
 import { getActivityTypesByActivityUid } from './activity-types.collection';
+import { getGalleryItemsByParentUid } from './gallery-items.collection';
 import { getReviewsByActivityUid } from './reviews.collection';
 
 export const activitiesRef = collection(fbDb, 'activities');
@@ -22,14 +23,17 @@ export async function getActivityByUid(uid: string): Promise<Activity> {
 
   const activityTypes = await getActivityTypesByActivityUid(uid);
 
+  const gallery = await getGalleryItemsByParentUid(uid);
+
   const reviews = await getReviewsByActivityUid(uid);
 
   return {
+    ...activityFbData,
     uid,
     activity_types: activityTypes,
-    ...activityFbData,
     average_rating: reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length,
     ratings_count: reviews.length,
+    gallery,
   };
 }
 
