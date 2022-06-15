@@ -5,7 +5,7 @@ import { BookingRating } from '../../constants/types.constant';
 import { Rating, Text } from '../atoms';
 
 const Container = tw.div`flex items-center space-x-4`;
-const Thumbnail = tw.img`w-20 self-stretch`;
+const Thumbnail = tw.img`w-20 flex-shrink-0 h-[70px] object-cover`;
 const Icon = tw.img`w-6 h-6`;
 
 type Props = {
@@ -21,7 +21,7 @@ function ActivityListItem({ thumbnail, name, avgRating, numRating, onClick = () 
     // TODO: Pass id here
     <Container onClick={() => onClick('1')}>
       <Thumbnail src={thumbnail} alt="Activity Thumbnail" />
-      <div tw="flex flex-col space-y-2">
+      <div tw="flex flex-col py-1 space-y-2 self-stretch">
         <Text.Small>{name}</Text.Small>
         <div tw="flex items-center space-x-2">
           <Rating rating={Math.floor(avgRating) as BookingRating} />

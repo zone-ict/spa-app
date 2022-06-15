@@ -3,7 +3,7 @@ import { formatCurrency } from '../../utils/helper.util';
 import { Text } from '../atoms';
 
 const Container = styled.div<{ isSelected?: boolean }>(({ isSelected }) => [
-  tw`flex w-full items-start flex-col space-y-2 py-3 px-4 border border-gray-900 rounded-md`,
+  tw`flex w-full items-start flex-col space-y-1 pt-2 pb-3 px-4 border border-gray-900 rounded-md`,
   !isSelected && tw`border-gray-300`,
 ]);
 

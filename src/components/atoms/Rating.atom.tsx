@@ -8,7 +8,7 @@ type Props = {
 
 function Rating({ rating }: Props) {
   return (
-    <div tw="inline-flex flex-row space-x-[5px]">
+    <div tw="inline-flex flex-row space-x-px">
       {[1, 2, 3, 4, 5].map((rate) => {
         const isActive = rate <= rating;
         return (

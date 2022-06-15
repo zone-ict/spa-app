@@ -31,7 +31,7 @@ function TopBar({ onBackClick, pageTitle, hideBackButton }: TopBarProps) {
   }, [goBack, hideBackButton, onBackClick]);
 
   return (
-    <header tw="fixed border-b border-b-gray-300 inline-flex items-center space-x-4 p-4 bg-white w-full max-w-md box-shadow[0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3pxrgba(0, 0, 0, 0.1)] z-50">
+    <header tw="fixed inline-flex items-center space-x-4 p-4 bg-white w-full max-w-md shadow-md z-50">
       {backButton}
       <Text.HeadingFive>{pageTitle}</Text.HeadingFive>
     </header>

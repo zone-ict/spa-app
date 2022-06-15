@@ -8,8 +8,8 @@ type Props = {
 
 const dummyData = [
   {
-    thumbnail: 'https://via.placeholder.com/200',
-    name: 'Activity Provider Name - Two Line Example',
+    thumbnail: 'https://via.placeholder.com/200x500',
+    name: "Activity Provider Name - Two Line Example, It's Longer Now",
     avgRating: 4.87,
     numRating: 17,
   },

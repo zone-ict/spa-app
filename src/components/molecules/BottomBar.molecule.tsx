@@ -15,7 +15,7 @@ export type BottomBarProps = {
 
 const FooterContainer = styled.footer(() => [
   tw`fixed bottom-0 py-3 bg-white flex w-full max-w-md justify-around`,
-  tw`border-t border-t-gray-300 box-shadow[0px -1px 2pxrgba(0, 0, 0, 0.06), 0px -1px 3px rgba(0, 0, 0, 0.1)]`,
+  tw`box-shadow[0px -1px 2px rgba(0, 0, 0, 0.06), 0px -1px 3px rgba(0, 0, 0, 0.1)]`,
 ]);
 
 const BottomBarItem = styled.button(() => [tw`inline-flex flex-col items-center`]);

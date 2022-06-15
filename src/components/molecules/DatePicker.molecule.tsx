@@ -25,19 +25,23 @@ const DayPickerContainer = styled.div`
   }
 
   .rdp-caption {
-    ${tw`bg-gray-100 pl-4 py-0`}
+    ${tw`text-base bg-gray-100 pl-4`}
   }
 
   .rdp-caption_label {
-    ${tw`text-sm m-0 p-0 font-normal`}
+    ${tw`text-sm m-0 p-0`}
   }
 
   .rdp-table {
     ${tw`table-fixed w-full max-w-full`}
   }
 
+  .rdp-head_cell {
+    ${tw`pt-4 pb-2 normal-case`}
+  }
+
   .rdp-day {
-    ${tw`text-xs text-gray-900 rounded-none font-medium w-full max-w-full h-[calc(60vh / 8)]`}
+    ${tw`text-xs text-gray-900 rounded-none font-medium mx-auto`}
 
     :hover {
       ${tw`bg-gray-100`}
@@ -49,7 +53,7 @@ const DayPickerContainer = styled.div`
   }
 
   .rdp-day_outside {
-    ${tw`text-gray-500`}
+    ${tw`text-gray-300`}
   }
 
   .rdp-day_selected {
