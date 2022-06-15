@@ -1,12 +1,12 @@
+import { ChevronRightIcon } from '@heroicons/react/solid';
 import React from 'react';
 import tw from 'twin.macro';
-import svgs from '../../assets/svgs';
 import { ReviewRating } from '../../models/Review.model';
 import { Rating, Text } from '../atoms';
 
-const Container = tw.div`flex items-center space-x-4`;
-const Thumbnail = tw.img`w-20 self-stretch`;
-const Icon = tw.img`w-6 h-6`;
+const Container = tw.div`flex items-center space-x-4 cursor-pointer`;
+const Thumbnail = tw.img`w-20 flex-shrink-0 h-[70px] object-cover`;
+const Icon = tw(ChevronRightIcon)`w-6 h-6 flex-shrink-0 text-gray-400`;
 
 type Props = {
   thumbnail: string;
@@ -29,7 +29,7 @@ function ActivityListItem({
     // TODO: Pass id here
     <Container onClick={() => onClick(uid)}>
       <Thumbnail src={thumbnail} alt="Activity Thumbnail" />
-      <div tw="flex w-full flex-col space-y-2">
+      <div tw="flex flex-col py-1 space-y-2 self-stretch">
         <Text.Small>{name}</Text.Small>
         <div tw="flex items-center space-x-2">
           <Rating
@@ -40,7 +40,7 @@ function ActivityListItem({
           </Text.Label>
         </div>
       </div>
-      <Icon src={svgs.ChevronRight} />
+      <Icon />
     </Container>
   );
 }

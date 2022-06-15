@@ -15,7 +15,7 @@ function ReviewItem({ date, rating, comment }: Props) {
         <Text.Label tw="text-gray-500">{date}</Text.Label>
         <Rating rating={rating} />
       </div>
-      <Text>{comment}</Text>
+      <Text.Small>{comment}</Text.Small>
     </div>
   );
 }

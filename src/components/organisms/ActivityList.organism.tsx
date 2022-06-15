@@ -10,7 +10,6 @@ type Props = {
 function ActivityList({ onItemClick, data }: Props) {
   return (
     <div tw="space-y-4">
-      {/** TODO: replace dummy data */}
       {data.map((activity) => (
         <ActivityListItem
           key={activity.uid}

@@ -6,3 +6,4 @@ export { default as Rating } from './Rating.atom';
 export { default as RatingSelector } from './RatingSelector.atom';
 export { default as Text } from './Text.atom';
 export { default as TextArea } from './TextArea.atom';
+export { default as Transition } from './Transition.atom';

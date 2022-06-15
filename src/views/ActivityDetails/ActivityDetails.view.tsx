@@ -10,7 +10,7 @@ const Video = tw.video`h-[200px] bg-black`;
 const Image = tw.img`h-[200px]`;
 const Content = tw.div`flex flex-col p-4 pb-[92px] space-y-6 relative`;
 const Description = tw(Text.Small)`text-gray-500`;
-const FooterButtonContainer = tw.div`fixed bottom-0 w-full max-w-md py-2 px-[18px] border-t border-t-gray-300 bg-white`;
+const FooterButtonContainer = tw.div`fixed bottom-0 w-full max-w-md py-2 px-4 border-t border-t-gray-300 bg-white`;
 
 function ActivityDetails() {
   const {

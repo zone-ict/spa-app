@@ -3,8 +3,8 @@ import { formatCurrency } from '../../utils/helper.util';
 import { Text } from '../atoms';
 
 const Container = styled.div<{ isSelected?: boolean }>(({ isSelected }) => [
-  tw`flex flex-col items-start w-full px-4 py-3 space-y-2 text-gray-500 border border-gray-300 rounded-md`,
-  isSelected && tw`text-gray-900 border-gray-900`,
+  tw`flex flex-col items-start w-full px-4 pt-2 pb-3 space-y-1 border border-gray-900 rounded-md`,
+  !isSelected && tw`border-gray-300`,
 ]);
 
 type Props = {

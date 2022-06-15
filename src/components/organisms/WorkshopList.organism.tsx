@@ -1,7 +1,7 @@
 import React from 'react';
 import 'twin.macro';
+import { WorkshopItem } from '../molecules';
 import { Workshop } from '../../models/Workshop.model';
-import WorkshopListItem from '../molecules/WorkshopListItem.molecule';
 
 type Props = {
   // TODO: data from BE
@@ -13,10 +13,9 @@ function WorkshopList({ onItemClick = () => {}, data }: Props) {
   return (
     <div tw="grid grid-cols-2 gap-4 p-4">
       {data.map((workshop) => (
-        <WorkshopListItem
+        <WorkshopItem
           key={workshop.uid}
-          image={workshop.main_photo_url}
-          name={workshop.name}
+          data={workshop}
           onClick={() => onItemClick(workshop.uid)}
         />
       ))}
