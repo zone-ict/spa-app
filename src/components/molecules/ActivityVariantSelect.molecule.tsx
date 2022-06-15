@@ -1,9 +1,9 @@
-import { Listbox, Transition } from '@headlessui/react';
+import { Listbox } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import React, { Fragment, useState } from 'react';
 import tw from 'twin.macro';
 import { formatCurrency } from '../../utils/helper.util';
-import { Text } from '../atoms';
+import { Text, Transition } from '../atoms';
 
 const dummyActivities = [
   { name: 'Activity Name', price: 1500 },
@@ -18,11 +18,11 @@ export default function ActivityVariantSelect() {
   return (
     <div>
       <Listbox value={selectedIndex} onChange={setSelectedIndex}>
-        <div tw="relative mt-1">
-          <Listbox.Button tw="relative w-full cursor-default rounded-md border border-gray-900 bg-white py-2 pl-3 pr-10 text-left">
-            <div tw="space-y-2">
-              <Text.Small tw="block truncate">{dummyActivities[selectedIndex].name}</Text.Small>
-              <Text.HeadingSix tw="block truncate">
+        <div tw="relative">
+          <Listbox.Button tw="relative w-full rounded-md border border-gray-900 bg-white pt-2 pb-3 pl-4 pr-10 text-left">
+            <div tw="space-y-1">
+              <Text.Small tw="truncate">{dummyActivities[selectedIndex].name}</Text.Small>
+              <Text.HeadingSix tw="truncate">
                 {formatCurrency(dummyActivities[selectedIndex].price)}
               </Text.HeadingSix>
             </div>
@@ -32,16 +32,19 @@ export default function ActivityVariantSelect() {
           </Listbox.Button>
           <Transition
             as={Fragment}
-            leave="transition ease-in duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
+            enter={tw`transition ease-in duration-100`}
+            enterFrom={tw`opacity-0`}
+            enterTo={tw`opacity-100`}
+            leave={tw`transition ease-in duration-100`}
+            leaveFrom={tw`opacity-100`}
+            leaveTo={tw`opacity-0`}
           >
-            <Listbox.Options tw="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base drop-shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <Listbox.Options tw="absolute z-10 max-h-60 w-full overflow-auto bg-white text-sm drop-shadow-lg focus:outline-none">
               {dummyActivities.map((item, index) => (
                 <Listbox.Option
                   css={[
                     tw`relative cursor-default select-none py-2 pl-10 pr-4 text-gray-900`,
-                    selectedIndex === index && tw`bg-orange-100 text-orange-900`,
+                    selectedIndex === index && tw`bg-gray-200`,
                   ]}
                   key={`${item.name}-${index.toString()}`}
                   value={index}
@@ -54,7 +57,7 @@ export default function ActivityVariantSelect() {
                         {item.name}
                       </span>
                       {props.selected && (
-                        <span tw="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                        <span tw="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-900">
                           <CheckIcon tw="w-5 h-5" />
                         </span>
                       )}
