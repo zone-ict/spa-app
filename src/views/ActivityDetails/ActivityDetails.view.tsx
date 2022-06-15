@@ -60,8 +60,11 @@ function ActivityDetails() {
         <ReviewList />
       </Content>
       <FooterButtonContainer>
-        <Button onClick={() => navigateToCreateBooking('1')}>
-          {translator.translate('Book a Translation')}
+        <Button
+          disabled={!state.selectedActivityTypeUid}
+          onClick={() => navigateToCreateBooking(activityData.uid)}
+        >
+          {translator.translate('Book a Schedule')}
         </Button>
       </FooterButtonContainer>
     </WithTopBar>

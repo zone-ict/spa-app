@@ -1,6 +1,7 @@
 // #region IMPORTS
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ActivityType } from '../models/Activity.model';
 
 // #endregion
 
@@ -11,6 +12,14 @@ type StartCreationPayload = {
   activityUid: string;
   userUid: string;
   workshopUid: string;
+  activityTypes: ActivityType[];
+  activityName: string;
+  workshopName: string;
+  activityPhotoUrl: string;
+};
+
+type UpdateActivityType = {
+  activityUid: string;
 };
 
 // #endregion
@@ -19,11 +28,26 @@ type StartCreationPayload = {
 
 export interface BookingCreationStore {
   isCreating: boolean;
-  creationPayload?: StartCreationPayload;
+  activityTypeUid: string;
+  activityUid: string;
+  userUid: string;
+  workshopUid: string;
+  activityTypes: ActivityType[];
+  activityName: string;
+  workshopName: string;
+  activityPhotoUrl: string;
 }
 
 export const bookingCreationInitialState: BookingCreationStore = {
   isCreating: false,
+  activityTypeUid: '',
+  activityUid: '',
+  userUid: '',
+  workshopUid: '',
+  activityTypes: [],
+  activityName: '',
+  workshopName: '',
+  activityPhotoUrl: '',
 };
 
 // #endregion
@@ -34,8 +58,12 @@ const bookingCreationSlice = createSlice({
   reducers: {
     startCreation: (state, action: PayloadAction<StartCreationPayload>) => ({
       ...state,
+      ...action.payload,
       isCreating: true,
-      creationPayload: action.payload,
+    }),
+    updateActivityType: (state, action: PayloadAction<UpdateActivityType>) => ({
+      ...state,
+      activityTypeUid: action.payload.activityUid,
     }),
     stopCreation: (state) => ({
       ...state,

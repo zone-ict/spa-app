@@ -6,12 +6,14 @@ import WithTopBottomBar from '../../components/templates/WithTopBottomBar.templa
 import useWorkshopsViewModel from './Workshops.viewModel';
 
 export default function WorkshopsView() {
-  const { navigateToBookings, navigateToWorkshopDetails, workshopData } = useWorkshopsViewModel();
+  const { navigateToBookings, navigateToWorkshopDetails, workshopData, navigateToSettings } =
+    useWorkshopsViewModel();
 
   return (
     <WithTopBottomBar
       hideBackButton
-      onInactiveMenuClick={navigateToBookings}
+      onBookingsClicked={navigateToBookings}
+      onSettingsClicked={navigateToSettings}
       activeMenu={BottomBarMenus.Workshops}
       pageTitle="Workshops"
     >

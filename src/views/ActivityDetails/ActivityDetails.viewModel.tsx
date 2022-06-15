@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import useTranslator from '../../hooks/useTranslator/useTranslator.hook';
 import { Activity } from '../../models/Activity.model';
 import { getActivityByUid } from '../../services/firebase/collections/activities.collection';
+import { getWorkshopDetail } from '../../services/firebase/collections/workshops.collection';
 import { fbAuth } from '../../services/firebase/firebase.service';
 import { bookingCreationAction } from '../../stores/bookingCreation.store';
 import BookingCreateRoute from '../BookingCreate/BookingCreate.route';
@@ -38,27 +39,41 @@ function useData() {
   return { activityData: data, activityIsLoading: isLoading };
 }
 
-function useNavigationHandlers(data: Activity | undefined) {
+function useNavigationHandlers(data: Activity | undefined, state: PageState) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [user] = useAuthState(fbAuth);
+
+  const workshopQuery = useQuery(
+    ['workshop', data?.workshop_uid],
+    () => getWorkshopDetail(data?.workshop_uid ?? ''),
+    {
+      enabled: !!data,
+    },
+  );
 
   const navigateToCreateBooking = useCallback(
     (id: string) => {
       if (!BookingCreateRoute.path || !data || !user) return;
 
-      dispatch(
-        bookingCreationAction.startCreation({
-          activityTypeUid: id,
-          activityUid: data.uid,
-          userUid: user.uid,
-          workshopUid: data.workshop_uid,
-        }),
-      );
+      if (!workshopQuery.data) return;
+
+      const params = {
+        activityTypeUid: state.selectedActivityTypeUid,
+        activityUid: data.uid,
+        userUid: user.uid,
+        workshopUid: data.workshop_uid,
+        activityTypes: data.activity_types,
+        activityName: data.name,
+        workshopName: workshopQuery.data.name,
+        activityPhotoUrl: data.thumbnail_url,
+      };
+
+      dispatch(bookingCreationAction.startCreation(params));
 
       navigate(BookingCreateRoute.path.replace(':id', id));
     },
-    [data, dispatch, navigate, user],
+    [data, dispatch, navigate, state.selectedActivityTypeUid, user, workshopQuery.data],
   );
 
   return { navigateToCreateBooking };
@@ -67,7 +82,7 @@ function useNavigationHandlers(data: Activity | undefined) {
 export default function useActivityDetailsViewModel() {
   const pageState = usePageState();
   const data = useData();
-  const navigationHandlers = useNavigationHandlers(data.activityData);
+  const navigationHandlers = useNavigationHandlers(data.activityData, pageState.state);
   const translator = useTranslator();
 
   return {

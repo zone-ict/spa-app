@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth/useAuth.hook';
 import { getWorkshops } from '../../services/firebase/collections/workshops.collection';
 import BookingsRoute from '../Bookings/Bookings.route';
+import SettingsRoute from '../Settings/Settings.route';
 import WorkshopDetailsRoute from '../WorkshopDetails/WorkshopDetails.route';
 
 function useNavigationHandlers() {
@@ -14,7 +15,6 @@ function useNavigationHandlers() {
     navigate(BookingsRoute.path);
   }, [navigate]);
 
-  // TODO: Add ID as params to be passed to the workshop details page
   const navigateToWorkshopDetails = useCallback(
     (id: string) => {
       if (!WorkshopDetailsRoute.path) return;
@@ -23,7 +23,12 @@ function useNavigationHandlers() {
     [navigate],
   );
 
-  return { navigateToBookings, navigateToWorkshopDetails };
+  const navigateToSettings = useCallback(() => {
+    if (!SettingsRoute.path) return;
+    navigate(SettingsRoute.path);
+  }, [navigate]);
+
+  return { navigateToBookings, navigateToWorkshopDetails, navigateToSettings };
 }
 
 function useWorkshopsData() {

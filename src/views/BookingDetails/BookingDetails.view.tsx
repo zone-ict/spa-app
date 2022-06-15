@@ -1,7 +1,10 @@
+import fromUnixTime from 'date-fns/fromUnixTime';
+import isSameDay from 'date-fns/isSameDay';
 import React, { useMemo } from 'react';
 import tw, { styled } from 'twin.macro';
 import images from '../../assets/images';
-import { Button, Chip, Text } from '../../components/atoms';
+import { Button, Text } from '../../components/atoms';
+import Chip from '../../components/atoms/Chip.atom';
 import ReviewItem from '../../components/molecules/ReviewItem.molecule';
 import { CancelBookingForm, ReviewBookingForm } from '../../components/organisms';
 import WithTopBar from '../../components/templates/WithTopBar.template';
@@ -17,10 +20,21 @@ const Description = styled(Text.Small)(() => [tw`text-gray-500`]);
 const Divider = styled.div(() => [tw`w-full border-t border-t-gray-300`]);
 
 function BookingDetails() {
-  const { state, updateState, cancelBookingFormHandler, reviewBookingFormHandler, translator } =
-    useBookingDetailsViewModel();
+  const {
+    state,
+    updateState,
+    cancelBookingFormHandler,
+    reviewBookingFormHandler,
+    translator,
+    bookingData,
+    bookingIsLoading,
+  } = useBookingDetailsViewModel();
 
   const bottomBar = useMemo(() => {
+    if (!bookingData || bookingIsLoading) {
+      return null;
+    }
+
     if (state.isReviewing) {
       return (
         <>
@@ -30,21 +44,21 @@ function BookingDetails() {
       );
     }
 
-    if (state.review) {
+    if (bookingData.review_uid) {
       return (
         <>
           <Divider />
           <Text.HeadingFive>{translator.translate('Your review')}</Text.HeadingFive>
           <ReviewItem
-            date={formatDate(new Date())}
-            rating={state.review.rating as ReviewRating}
-            comment={state.review.comment}
+            date={formatDate(fromUnixTime(bookingData.activity_date))}
+            rating={bookingData.review_rating as ReviewRating}
+            comment={bookingData.review_comment}
           />
         </>
       );
     }
 
-    if (state.isCompleted) {
+    if (bookingData.status === BookingStatus.Completed && !bookingData.review_uid) {
       return (
         <Button
           onClick={() => {
@@ -56,12 +70,12 @@ function BookingDetails() {
       );
     }
 
-    if (state.cancellationReason) {
+    if (bookingData.status === BookingStatus.Cancelled) {
       return (
         <>
           <Divider />
           <Text.HeadingSix tw="font-normal">
-            {translator.translate('Reason:')} {state.cancellationReason}
+            {translator.translate('Reason:')} {bookingData.cancel_reason}
           </Text.HeadingSix>
         </>
       );
@@ -72,19 +86,32 @@ function BookingDetails() {
         <div tw="w-full border-t border-t-gray-300" />
         <Description>
           {translator.translate(
-            'Show this QR code to the workshop staff during your booking schedule',
+            bookingData.status === BookingStatus.InProgress
+              ? 'Your QR code has been scanned. We hope you are having a great time!'
+              : 'Show this QR code to the workshop staff during your booking schedule',
           )}
         </Description>
         <div tw="flex justify-center">
           <img src={images.Frame} alt="QR Code" />
         </div>
-        <Button danger onClick={() => updateState({ isCancelling: true })} type="button">
-          Cancel Booking
-        </Button>
-        {/* TODO: Add conditional here on booking date */}
-        <Description tw="text-center">
-          {translator.translate('You can no longer cancel your booking on the chosen date.')}
-        </Description>
+        {bookingData.status === BookingStatus.Booked && (
+          <>
+            <Button
+              danger
+              disabled={isSameDay(new Date(), fromUnixTime(bookingData.activity_date))}
+              onClick={() => updateState({ isCancelling: true })}
+              type="button"
+            >
+              Cancel Booking
+            </Button>
+            {/* TODO: Add conditional here on booking date */}
+            {isSameDay(new Date(), fromUnixTime(bookingData.activity_date)) && (
+              <Description tw="text-center">
+                {translator.translate('You can no longer cancel your booking on the chosen date.')}
+              </Description>
+            )}
+          </>
+        )}
       </>
     ) : (
       <>
@@ -93,34 +120,29 @@ function BookingDetails() {
       </>
     );
   }, [
+    bookingData,
+    bookingIsLoading,
     cancelBookingFormHandler,
     reviewBookingFormHandler,
-    state.cancellationReason,
     state.isCancelling,
-    state.isCompleted,
     state.isReviewing,
-    state.review,
     translator,
     updateState,
   ]);
 
+  if (bookingIsLoading || !bookingData) {
+    return <WithTopBar pageTitle="Booking Detail">{translator.translate('Loading...')}</WithTopBar>;
+  }
   return (
     <WithTopBar pageTitle="Booking Detail">
       <Container>
-        <Text.HeadingFour>Activity Name Example - It Can Be Multiple Lines Long</Text.HeadingFour>
-        <Text>Provider Name</Text>
+        <Text.HeadingFour>{bookingData.activity_name}</Text.HeadingFour>
+        <Text>{bookingData.workshop_name}</Text>
         <div tw="inline-flex space-x-4 items-center">
-          {/* TODO: Update chip component to get text directly inside component */}
-          <Chip status={BookingStatus.InProgress}>In Progress</Chip>
-          <Text.Small>12 Jun 2022, 12:00 PM</Text.Small>
+          <Chip status={bookingData.status} />
+          <Text.Small>{formatDate(fromUnixTime(bookingData.activity_date))}</Text.Small>
         </div>
-        <Description>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisi vel
-          consectetur euismod, nisi nisl aliquet nisi, eget Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Nullam euismod, nisi vel consectetur euismod, nisi nisl aliquet nisi,
-          egetLorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisi vel
-          consectetur euismod, nisi nisl aliquet nisi, eget
-        </Description>
+        <Description>{bookingData.activity_description}</Description>
         {bottomBar}
       </Container>
     </WithTopBar>

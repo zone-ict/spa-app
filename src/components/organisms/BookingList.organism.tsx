@@ -1,116 +1,28 @@
-import { BookingStatus } from '../../models/Booking.model';
+import fromUnixTime from 'date-fns/fromUnixTime';
+import { Booking } from '../../models/Booking.model';
+import { ReviewRating } from '../../models/Review.model';
 import { formatDate } from '../../utils/helper.util';
 import { BookingListItem } from '../molecules';
 
 type Props = {
-  // TODO: Update this with data from BE
-  onItemClick?(): void;
+  data: Booking[];
+  onItemClick?(id: string): void;
 };
 
-function BookingList({ onItemClick }: Props) {
+function BookingList({ onItemClick = () => {}, data }: Props) {
   return (
     <div>
-      <BookingListItem
-        onClick={onItemClick}
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.InProgress}
-        title="Booking 1"
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.InProgress}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Cancelled}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
-
-      <BookingListItem
-        date={formatDate(new Date())}
-        location="Naha, Okinawa"
-        status={BookingStatus.Completed}
-        title="Booking 1 Extralong stragalavilicious dsomething something Extralong stragalavilicious dsomething something  Extralong stragalavilicious dsomething something "
-        rating={4}
-      />
+      {data.map((booking) => (
+        <BookingListItem
+          key={booking.uid}
+          onClick={() => onItemClick(booking.uid)}
+          date={formatDate(fromUnixTime(booking.activity_date))}
+          location={booking.workshop_name}
+          status={booking.status}
+          title={booking.activity_name}
+          rating={(booking.review_rating as ReviewRating) ?? undefined}
+        />
+      ))}
     </div>
   );
 }

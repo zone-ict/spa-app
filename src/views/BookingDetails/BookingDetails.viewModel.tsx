@@ -1,9 +1,16 @@
 import { FormikConfig } from 'formik';
 import { useCallback, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useLocation } from 'react-router-dom';
 import { number, object, string } from 'yup';
 import { CancelBookingFormSchema } from '../../components/organisms/CancelBookingForm.organism';
 import { ReviewBookingFormSchema } from '../../components/organisms/ReviewBookingForm.organism';
 import useTranslator from '../../hooks/useTranslator/useTranslator.hook';
+import {
+  cancelBooking,
+  CancelBookingParams,
+  getBookingByUid,
+} from '../../services/firebase/collections/bookings.collection';
 
 // #region STATE
 
@@ -11,7 +18,6 @@ type BookingDetailState = {
   isCancelling: boolean;
   cancellationReason?: string;
   isReviewing: boolean;
-  // TODO: Update this to use data from FireStore
   isCompleted: boolean;
   review?: {
     rating: number;
@@ -42,16 +48,36 @@ function useBookingDetailState() {
 
 // #endregion
 
+// #region DATA
+
+function useData(uid: string) {
+  const { data, isLoading } = useQuery(['bookings', uid], () => getBookingByUid(uid));
+
+  return { bookingData: data, bookingIsLoading: isLoading };
+}
+
+// #endregion
+
 // #region CANCEL BOOKING
 
 // TODO: Just change state before integrating with FireStore
-function useHandleSubmitCancelBooking(state: PageState) {
-  const handleSubmit = (values: CancelBookingFormSchema) => {
-    console.log('tono suprapto');
+function useHandleSubmitCancelBooking(state: PageState, uid: string) {
+  const queryClient = useQueryClient();
 
+  const cancelReasonMutation = useMutation((params: CancelBookingParams) => cancelBooking(params), {
+    onSuccess: async (_, params) => {
+      await queryClient.invalidateQueries(['bookings', params.uid]);
+    },
+  });
+
+  const handleSubmit = (values: CancelBookingFormSchema) => {
     state.updateState({
       cancellationReason: values.reason,
       isCancelling: false,
+    });
+    cancelReasonMutation.mutate({
+      reason: values.reason,
+      uid,
     });
   };
 
@@ -116,11 +142,16 @@ function useReviewBookingFormHandler(onSubmit: (values: ReviewBookingFormSchema)
 // #endregion
 
 export default function useBookingDetailsViewModel() {
+  const { pathname } = useLocation();
+
+  const bookingId = pathname.split('/')[2];
+
   const translator = useTranslator();
   const bookingDetailState = useBookingDetailState();
+  const data = useData(bookingId);
 
   // Cancel Booking
-  const handleSubmitCancelBooking = useHandleSubmitCancelBooking(bookingDetailState);
+  const handleSubmitCancelBooking = useHandleSubmitCancelBooking(bookingDetailState, bookingId);
   const cancelBookingFormHandler = useCancelBookingFormHandler(handleSubmitCancelBooking);
 
   // Review
@@ -129,6 +160,7 @@ export default function useBookingDetailsViewModel() {
 
   return {
     ...bookingDetailState,
+    ...data,
     translator,
     cancelBookingFormHandler,
     reviewBookingFormHandler,

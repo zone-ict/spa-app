@@ -12,7 +12,12 @@ export interface Booking {
   activity_uid: string;
   cancel_reason?: string;
   review_uid?: string;
+  review_rating: number;
+  review_comment?: string;
   status: BookingStatus;
   user_uid: string;
   workshop_uid: string;
+  workshop_name: string;
+  activity_name: string;
+  activity_description: string;
 }
