@@ -2,23 +2,21 @@ import { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { fbAuth } from '../../services/firebase/firebase.service';
-import LoginRoute from '../../views/Login/Login.route';
+import LoginRoute from '../Login/Login.route';
+import WorkshopsRoute from '../Workshops/Workshops.route';
 
-export function useRedirectionBasedOnSession() {
-  const navigate = useNavigate();
+export default function useAuthLoadingViewModel() {
   const [user, loading] = useAuthState(fbAuth);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (loading) return;
-
-    if (!user) {
+    if (user) {
+      if (!WorkshopsRoute.path) return;
+      navigate(WorkshopsRoute.path);
+    } else {
       if (!LoginRoute.path) return;
       navigate(LoginRoute.path);
-      window.history.replaceState({}, document.title);
     }
   }, [loading, navigate, user]);
-}
-
-export default function useAuth() {
-  useRedirectionBasedOnSession();
 }

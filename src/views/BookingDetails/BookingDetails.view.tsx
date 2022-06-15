@@ -5,7 +5,8 @@ import { Button, Chip, Text } from '../../components/atoms';
 import ReviewItem from '../../components/molecules/ReviewItem.molecule';
 import { CancelBookingForm, ReviewBookingForm } from '../../components/organisms';
 import WithTopBar from '../../components/templates/WithTopBar.template';
-import { BookingRating, BookingStatus } from '../../constants/types.constant';
+import { BookingStatus } from '../../models/Booking.model';
+import { ReviewRating } from '../../models/Review.model';
 import { formatDate } from '../../utils/helper.util';
 import useBookingDetailsViewModel from './BookingDetails.viewModel';
 
@@ -36,7 +37,7 @@ function BookingDetails() {
           <Text.HeadingFive>{translator.translate('Your review')}</Text.HeadingFive>
           <ReviewItem
             date={formatDate(new Date())}
-            rating={state.review.rating as BookingRating}
+            rating={state.review.rating as ReviewRating}
             comment={state.review.comment}
           />
         </>

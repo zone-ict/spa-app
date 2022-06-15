@@ -1,4 +1,4 @@
-import { BookingStatus } from '../../constants/types.constant';
+import { BookingStatus } from '../../models/Booking.model';
 import { formatDate } from '../../utils/helper.util';
 import { BookingListItem } from '../molecules';
 

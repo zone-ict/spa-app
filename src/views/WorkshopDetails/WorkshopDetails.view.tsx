@@ -15,19 +15,6 @@ const Contact = tw.div`flex flex-col`;
 const Clickable = tw.div`cursor-pointer`;
 const IconContainer = tw.div`w-6 h-6 flex-shrink-0 flex-grow-0 text-gray-400`;
 
-const dummyGallery = [
-  {
-    type: 'video',
-    url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
-  },
-  { type: 'image', url: 'https://via.placeholder.com/600x800' },
-  { type: 'image', url: 'https://via.placeholder.com/800x600' },
-  { type: 'image', url: 'https://via.placeholder.com/500x700' },
-  { type: 'image', url: 'https://via.placeholder.com/400x500' },
-  { type: 'image', url: 'https://via.placeholder.com/600x800' },
-  { type: 'image', url: 'https://via.placeholder.com/500' },
-];
-
 function ContactItem({
   icon,
   text,
@@ -49,26 +36,32 @@ function ContactItem({
 }
 
 function WorkshopDetails() {
-  const { goToMaps, callWorkshop, goToLink, goToActivityDetail } = useWorkshopDetailsViewModel();
+  const { goToMaps, callWorkshop, goToLink, goToActivityDetail, workshopData, workshopIsLoading } =
+    useWorkshopDetailsViewModel();
+
+  if (workshopIsLoading || !workshopData) {
+    // TODO: Add loading skeleton
+    return <WithTopBar pageTitle="Workshop Detail">Loading...</WithTopBar>;
+  }
 
   return (
     <WithTopBar pageTitle="Workshop Detail">
       <Gallery>
         {/** TODO: replace dummy data */}
-        {dummyGallery.map((item) => {
-          if (item.type === 'video') {
+        {workshopData.gallery.map((item) => {
+          if (item.type === 'VIDEO') {
             return (
-              <Video controls>
+              <Video controls key={item.url}>
                 <source src={item.url} type="video/mp4" />
                 Your browser does not support the video tag.
               </Video>
             );
           }
-          return <Image src={item.url} />;
+          return <Image key={item.url} src={item.url} />;
         })}
       </Gallery>
       <Content>
-        <Text.HeadingFour>Activity Provider Name - Two Line Example</Text.HeadingFour>
+        <Text.HeadingFour>{workshopData.name}</Text.HeadingFour>
         <Description>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra proin ac ultrices amet in
           adipiscing. Egestas enim nam sapien diam habitant quisque magna tincidunt ullamcorper.
@@ -76,23 +69,23 @@ function WorkshopDetails() {
         <Contact>
           <ContactItem
             icon={<OfficeBuildingIcon tw="w-full h-full" />}
-            text="1 Lorem-23-4 Ipsum as Example Address, Lorem Ipsum, Dolor Sit Amet"
+            text={workshopData.address}
             onClick={goToMaps}
           />
           <ContactItem
             icon={<PhoneIcon tw="w-full h-full" />}
-            text="+81-00-000-00000"
+            text={workshopData.phone_number}
             onClick={callWorkshop}
           />
           <ContactItem
             icon={<ShoppingBagIcon tw="w-full h-full" />}
-            text="https://link.to.shop"
+            text={workshopData.shop_url}
             onClick={goToLink}
           />
         </Contact>
         <hr />
         <Text.HeadingFive>Activities</Text.HeadingFive>
-        <ActivityList onItemClick={goToActivityDetail} />
+        <ActivityList data={workshopData.activities} onItemClick={goToActivityDetail} />
       </Content>
     </WithTopBar>
   );

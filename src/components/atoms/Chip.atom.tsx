@@ -1,5 +1,5 @@
 import tw, { styled } from 'twin.macro';
-import { BookingStatus } from '../../constants/types.constant';
+import { BookingStatus } from '../../models/Booking.model';
 
 type Props = {
   status: BookingStatus;
