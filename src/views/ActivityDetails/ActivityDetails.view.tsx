@@ -1,18 +1,16 @@
 import tw from 'twin.macro';
-import svgs from '../../assets/svgs';
-import { Text } from '../../components/atoms';
-import { ActivityList } from '../../components/organisms';
+import { Button, Text } from '../../components/atoms';
+import { RatingWithAverage } from '../../components/molecules';
+import { ActivityTypeList, ReviewList } from '../../components/organisms';
 import WithTopBar from '../../components/templates/WithTopBar.template';
-import useWorkshopDetailsViewModel from './WorkshopDetails.viewModel';
+import useActivityDetailsViewModel from './ActivityDetails.viewModel';
 
 const Gallery = tw.div`flex items-center space-x-2 overflow-x-auto`;
 const Video = tw.video`h-[200px] bg-black`;
 const Image = tw.img`h-[200px]`;
-const Content = tw.div`flex flex-col p-4 pb-8 space-y-6`;
+const Content = tw.div`flex flex-col p-4 pb-[92px] space-y-6 relative`;
 const Description = tw(Text.Small)`text-gray-500`;
-const Contact = tw.div` space-y-4`;
-const Clickable = tw.div``;
-const Icon = tw.img`w-6 h-6`;
+const FooterButtonContainer = tw.div`fixed bottom-0 w-full max-w-md py-2 px-[18px] border-t border-t-gray-300 bg-white`;
 
 const dummyGallery = [
   {
@@ -27,21 +25,17 @@ const dummyGallery = [
   { type: 'image', url: 'https://via.placeholder.com/500' },
 ];
 
-function ContactItem({ icon, text, onClick }: { icon: string; text: string; onClick(): void }) {
-  return (
-    <Clickable onClick={onClick} tw="flex items-center space-x-4">
-      <Icon src={icon} />
-      <Text.Small tw="flex-auto">{text}</Text.Small>
-      <Icon src={svgs.ChevronRight} />
-    </Clickable>
-  );
-}
+const dummyActivities = [
+  { name: 'Activity Name', price: 1500 },
+  { name: 'Activity Name 2', price: 2000 },
+  { name: "Activity Name 3 which is quite long for a name, but it's needed", price: 2000 },
+];
 
-function WorkshopDetails() {
-  const { goToMaps, callWorkshop, goToLink, goToActivityDetail } = useWorkshopDetailsViewModel();
+function ActivityDetails() {
+  useActivityDetailsViewModel();
 
   return (
-    <WithTopBar pageTitle="Workshop Detail">
+    <WithTopBar pageTitle="Activity Detail">
       <Gallery>
         {/** TODO: replace dummy data */}
         {dummyGallery.map((item) => {
@@ -56,27 +50,24 @@ function WorkshopDetails() {
           return <Image src={item.url} />;
         })}
       </Gallery>
+
       <Content>
         <Text.HeadingFour>Activity Provider Name - Two Line Example</Text.HeadingFour>
+        <RatingWithAverage avgRating={4.75} ratingCount={243} />
         <Description>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra proin ac ultrices amet in
           adipiscing. Egestas enim nam sapien diam habitant quisque magna tincidunt ullamcorper.
         </Description>
-        <Contact>
-          <ContactItem
-            icon={svgs.OfficeBuilding}
-            text="1 Lorem-23-4 Ipsum as Example Address, Lorem Ipsum, Dolor Sit Amet"
-            onClick={goToMaps}
-          />
-          <ContactItem icon={svgs.Phone} text="+81-00-000-00000" onClick={callWorkshop} />
-          <ContactItem icon={svgs.ShoppingBag} text="https://link.to.shop" onClick={goToLink} />
-        </Contact>
         <hr />
-        <Text.HeadingFive>Activities</Text.HeadingFive>
-        <ActivityList onItemClick={goToActivityDetail} />
+        <ActivityTypeList data={dummyActivities} />
+        <hr />
+        <ReviewList />
       </Content>
+      <FooterButtonContainer>
+        <Button>Book a Schedule</Button>
+      </FooterButtonContainer>
     </WithTopBar>
   );
 }
 
-export default WorkshopDetails;
+export default ActivityDetails;
