@@ -15,7 +15,7 @@ function WorkshopItem({ data, onClick = () => {} }: Props) {
         src={data.main_photo_url}
         alt={`Workshop ${data.name}`}
       />
-      <Text.Small tw="display[-webkit-box] -webkit-line-clamp[2] -webkit-box-orient[vertical] overflow-hidden text-center">
+      <Text.Small tw="display[-webkit-box] -webkit-line-clamp[2] -webkit-box-orient[vertical] overflow-hidden w-full text-center">
         {data.name}
       </Text.Small>
     </button>

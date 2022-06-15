@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import tw, { styled } from 'twin.macro';
 import images from '../../assets/images';
-import { Button, Chip, Text } from '../../components/atoms';
+import { Button, Chip, Skeleton, Text } from '../../components/atoms';
 import ReviewItem from '../../components/molecules/ReviewItem.molecule';
 import { CancelBookingForm, ReviewBookingForm } from '../../components/organisms';
 import WithTopBar from '../../components/templates/WithTopBar.template';
@@ -103,6 +103,22 @@ function BookingDetails() {
     translator,
     updateState,
   ]);
+
+  if (false) {
+    return (
+      <WithTopBar pageTitle="Booking Detail">
+        <Container>
+          <Skeleton tw="h-7" />
+          <Skeleton tw="h-6 w-1/3" />
+          <div tw="flex space-x-4">
+            <Skeleton tw="h-5 w-1/4" />
+            <Skeleton tw="h-5 w-1/2" />
+          </div>
+          <Skeleton tw="h-40" />
+        </Container>
+      </WithTopBar>
+    );
+  }
 
   return (
     <WithTopBar pageTitle="Booking Detail">

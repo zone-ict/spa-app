@@ -8,7 +8,7 @@ import { ReviewItem } from '../molecules';
 
 type Props = {
   data?: {
-    date: Date;
+    date: string;
     rating: ReviewRating;
     comment: string;
   }[];

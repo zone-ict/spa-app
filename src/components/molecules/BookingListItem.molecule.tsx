@@ -12,7 +12,7 @@ import Chip from '../atoms/Chip.atom';
 // #region STYLED COMPONENTS
 
 const Container = styled.div(() => [
-  tw`p-4 space-y-2 drop-shadow bg-white`,
+  tw`p-4 space-y-2 border-b border-gray-300 bg-white`,
   tw`select-none cursor-pointer`,
 ]);
 
