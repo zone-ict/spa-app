@@ -11,7 +11,7 @@ import fbConfig from '../../configs/firebase/firebase.config';
 import useHomeViewModel from './Home.viewModel';
 
 export default function HomeView() {
-  const { navigateToBookings, navigateToWorkshopDetails, login, logout } = useHomeViewModel();
+  const { navigateToBookings, navigateToWorkshopDetails, logout } = useHomeViewModel();
 
   // TODO: Investigate what's causing this error
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
@@ -25,6 +25,7 @@ export default function HomeView() {
   // useEffect(() => {
   //   console.log('items=', {items, itemsLoading, itemsError})
   // }, [items , itemsLoading, itemsError ])
+
   return (
     <WithTopBottomBar
       hideBackButton
@@ -37,27 +38,14 @@ export default function HomeView() {
       <br />
       <br />
 
-      {/* TODO: Move this to Auth Page */}
-      {!user && <div>Firebase LoggedOut</div>}
-      {user && <div>Firebase LoggedIn: {user.displayName}</div>}
-
       {items?.docs.map((item) => (
         <span key={item.id}>Firestore items: {item.get('name')}</span>
       ))}
 
-      {/* this DIV for default login UI */}
-      <div id="firebaseui-auth-container" />
       <div>
-        {!user && (
-          <Button type="button" onClick={login}>
-            Login
-          </Button>
-        )}
-        {user && (
-          <Button type="button" onClick={logout}>
-            Logout
-          </Button>
-        )}
+        <Button type="button" onClick={logout}>
+          Logout
+        </Button>
       </div>
     </WithTopBottomBar>
   );
