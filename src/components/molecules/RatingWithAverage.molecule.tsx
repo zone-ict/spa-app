@@ -1,5 +1,5 @@
 import 'twin.macro';
-import { BookingRating } from '../../constants/types.constant';
+import { ReviewRating } from '../../models/Review.model';
 import { Rating, Text } from '../atoms';
 
 type Props = {
@@ -10,9 +10,9 @@ type Props = {
 export default function RatingWithAverage({ avgRating, ratingCount }: Props) {
   return (
     <div tw="flex items-center space-x-2">
-      <Rating rating={Math.floor(avgRating) as BookingRating} />
+      <Rating rating={Math.floor(avgRating) as ReviewRating} />
       <Text.Label tw="text-gray-500">
-        {avgRating} out of {ratingCount}
+        {ratingCount ? `${avgRating} out of ${ratingCount}` : 'No ratings yet'}
       </Text.Label>
     </div>
   );

@@ -1,28 +1,46 @@
 import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Workshop } from '../../models/Workshop.model';
+import { getWorkshopDetail } from '../../services/firebase/collections/workshops.collection';
 import ActivityDetailsRoute from '../ActivityDetails/ActivityDetails.route';
 
-function useNavigationHandler() {
+function useData() {
+  const { pathname } = useLocation();
+
+  const workshopUid = pathname.split('/')[2];
+
+  const { data, isLoading } = useQuery(['workshop', workshopUid], () =>
+    getWorkshopDetail(workshopUid),
+  );
+
+  return { workshopData: data, workshopIsLoading: isLoading };
+}
+
+function useNavigationHandlers(workshopData: Workshop | undefined) {
   const navigate = useNavigate();
 
   const goToMaps = () => {
-    /** TODO */
+    if (!workshopData) return;
+    window.open(workshopData.google_maps_url, '_blank');
   };
 
   const callWorkshop = () => {
-    /** TODO */
+    if (!workshopData) return;
+    window.open(`tel:${workshopData.phone_number}`, '_blank');
   };
 
   const goToLink = () => {
-    /** TODO */
+    if (!workshopData) return;
+    window.open(workshopData.shop_url, '_blank');
   };
 
   const goToActivityDetail = useCallback(
     (id: string) => {
-      if (!ActivityDetailsRoute.path) return;
+      if (!ActivityDetailsRoute.path || !workshopData) return;
       navigate(ActivityDetailsRoute.path.replace(':id', id));
     },
-    [navigate],
+    [navigate, workshopData],
   );
 
   return {
@@ -34,7 +52,8 @@ function useNavigationHandler() {
 }
 
 export default function useWorkshopDetailsViewModel() {
-  const navigations = useNavigationHandler();
+  const data = useData();
+  const navigationHandlers = useNavigationHandlers(data.workshopData);
 
-  return { ...navigations };
+  return { ...navigationHandlers, ...data };
 }

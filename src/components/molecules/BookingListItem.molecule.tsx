@@ -3,7 +3,8 @@
 import { useMemo } from 'react';
 import tw, { styled } from 'twin.macro';
 import assets from '../../assets';
-import { BookingRating, BookingStatus } from '../../constants/types.constant';
+import { BookingStatus } from '../../models/Booking.model';
+import { ReviewRating } from '../../models/Review.model';
 import Chip from '../atoms/Chip.atom';
 
 // #endregion
@@ -11,20 +12,20 @@ import Chip from '../atoms/Chip.atom';
 // #region STYLED COMPONENTS
 
 const Container = styled.div(() => [
-  tw`p-4 space-y-2 drop-shadow bg-white`,
-  tw`select-none cursor-pointer`,
+  tw`p-4 space-y-2 bg-white drop-shadow`,
+  tw`cursor-pointer select-none`,
 ]);
 
-const InfoContainer = styled.div(() => [tw`inline-flex justify-between items-center w-full`]);
+const InfoContainer = styled.div(() => [tw`inline-flex items-center justify-between w-full`]);
 
 const Title = styled.h2(() => [
   tw`text-sm text-gray-900`,
   tw`display[-webkit-box] -webkit-line-clamp[2] -webkit-box-orient[vertical] overflow-hidden`,
 ]);
 
-const RatingContainer = styled.div(() => [tw`inline-flex space-x-1 items-center`]);
+const RatingContainer = styled.div(() => [tw`inline-flex items-center space-x-1`]);
 
-const DateLocationContainer = styled.div(() => [tw`space-x-2 text-gray-500 text-xs`]);
+const DateLocationContainer = styled.div(() => [tw`space-x-2 text-xs text-gray-500`]);
 
 // #endregion
 
@@ -35,12 +36,13 @@ type Props = {
   date: string;
   location: string;
   status: BookingStatus;
-  rating?: BookingRating;
+  rating?: ReviewRating;
   // TODO: Update this to better mirror data from BE
   onClick?(): void;
 };
 
 const mappedText: Record<BookingStatus, string> = {
+  [BookingStatus.Booked]: 'Booked',
   [BookingStatus.InProgress]: 'In Progress',
   [BookingStatus.Completed]: 'Completed',
   [BookingStatus.Cancelled]: 'Cancelled',
@@ -76,7 +78,7 @@ function BookingListItem({ title, date, location, status, rating, onClick }: Pro
           <span>•</span>
           <span>{location}</span>
         </DateLocationContainer>
-        <Chip status={status}>{mappedText[status]}</Chip>
+        <Chip status={status} />
       </InfoContainer>
     </Container>
   );

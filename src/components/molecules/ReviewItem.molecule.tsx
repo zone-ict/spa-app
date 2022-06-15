@@ -1,10 +1,10 @@
 import 'twin.macro';
-import { BookingRating } from '../../constants/types.constant';
+import { ReviewRating } from '../../models/Review.model';
 import { Rating, Text } from '../atoms';
 
 type Props = {
   date: string;
-  rating: BookingRating;
+  rating: ReviewRating;
   comment?: string;
 };
 
@@ -15,7 +15,7 @@ function ReviewItem({ date, rating, comment }: Props) {
         <Text.Label tw="text-gray-500">{date}</Text.Label>
         <Rating rating={rating} />
       </div>
-      <Text>{comment}</Text>
+      <Text.Small>{comment}</Text.Small>
     </div>
   );
 }

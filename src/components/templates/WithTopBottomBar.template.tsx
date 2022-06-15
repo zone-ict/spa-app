@@ -17,7 +17,9 @@ function WithTopBottomBar({
   pageTitle,
   onBackClick,
   activeMenu,
-  onInactiveMenuClick,
+  onWorkshopsClicked,
+  onBookingsClicked,
+  onSettingsClicked,
   hideBackButton,
 }: Props) {
   return (
@@ -30,7 +32,12 @@ function WithTopBottomBar({
         <div tw="h-14" />
         {children}
         <div tw="h-[60px]" />
-        <BottomBar activeMenu={activeMenu} onInactiveMenuClick={onInactiveMenuClick} />
+        <BottomBar
+          activeMenu={activeMenu}
+          onWorkshopsClicked={onWorkshopsClicked}
+          onBookingsClicked={onBookingsClicked}
+          onSettingsClicked={onSettingsClicked}
+        />
       </div>
     </div>
   );

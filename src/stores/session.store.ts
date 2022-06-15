@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import apiService from '../../services/api/api.service';
+import apiService from '../services/api/api.service';
 
 // #region ACTION PAYLOADS
 

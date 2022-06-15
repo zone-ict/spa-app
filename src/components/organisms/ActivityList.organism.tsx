@@ -1,36 +1,23 @@
 import React from 'react';
 import 'twin.macro';
+import { Activity } from '../../models/Activity.model';
 import ActivityListItem from '../molecules/ActivityListItem.molecule';
 
 type Props = {
   onItemClick?(id: string): void;
+  data: Activity[];
 };
-
-const dummyData = [
-  {
-    thumbnail: 'https://via.placeholder.com/200',
-    name: 'Activity Provider Name - Two Line Example',
-    avgRating: 4.87,
-    numRating: 17,
-  },
-  {
-    thumbnail: 'https://via.placeholder.com/200',
-    name: 'Activity Provider Name - Two Line Example',
-    avgRating: 4.87,
-    numRating: 17,
-  },
-];
-
-function ActivityList({ onItemClick }: Props) {
+function ActivityList({ onItemClick, data }: Props) {
   return (
     <div tw="space-y-4">
-      {/** TODO: replace dummy data */}
-      {dummyData.map((activity) => (
+      {data.map((activity) => (
         <ActivityListItem
-          thumbnail={activity.thumbnail}
+          key={activity.uid}
+          uid={activity.uid}
+          thumbnail={activity.thumbnail_url}
           name={activity.name}
-          avgRating={activity.avgRating}
-          numRating={activity.numRating}
+          avgRating={activity.average_rating ?? 0}
+          numRating={activity.ratings_count ?? 0}
           onClick={onItemClick}
         />
       ))}

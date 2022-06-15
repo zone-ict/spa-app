@@ -1,14 +1,14 @@
 import 'twin.macro';
 import svgs from '../../assets/svgs';
-import { BookingRating } from '../../constants/types.constant';
+import { ReviewRating } from '../../models/Review.model';
 
 type Props = {
-  rating: BookingRating;
+  rating?: ReviewRating;
 };
 
-function Rating({ rating }: Props) {
+function Rating({ rating = 0 }: Props) {
   return (
-    <div tw="inline-flex flex-row space-x-[5px]">
+    <div tw="inline-flex flex-row space-x-px">
       {[1, 2, 3, 4, 5].map((rate) => {
         const isActive = rate <= rating;
         return (

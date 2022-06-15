@@ -1,25 +1,24 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
-import { RootState } from '../../app/store/store.app';
+import { fbAuth } from '../../services/firebase/firebase.service';
+import LoginRoute from '../../views/Login/Login.route';
 
-export function useRedirectionBasedOnSession(isStorageRehydrated: boolean, isLoggedIn: boolean) {
+export function useRedirectionBasedOnSession() {
   const navigate = useNavigate();
+  const [user, loading] = useAuthState(fbAuth);
 
   useEffect(() => {
-    if (!isStorageRehydrated) return;
+    if (loading) return;
 
-    navigate(isLoggedIn ? '/' : '/login');
-
-    window.history.replaceState({}, document.title);
-  }, [navigate, isStorageRehydrated, isLoggedIn]);
+    if (!user) {
+      if (!LoginRoute.path) return;
+      navigate(LoginRoute.path);
+      window.history.replaceState({}, document.title);
+    }
+  }, [loading, navigate, user]);
 }
 
 export default function useAuth() {
-  // Ignored because that's the default naming for persist items
-  // eslint-disable-next-line no-underscore-dangle
-  const isStorageRehydrated = useSelector((state: RootState) => state._persist.rehydrated);
-  const { isLoggedIn } = useSelector((state: RootState) => state.session);
-
-  useRedirectionBasedOnSession(isStorageRehydrated, isLoggedIn);
+  useRedirectionBasedOnSession();
 }

@@ -1,10 +1,10 @@
 import 'twin.macro';
 import svgs from '../../assets/svgs';
-import { BookingRating } from '../../constants/types.constant';
+import { ReviewRating } from '../../models/Review.model';
 
 type Props = {
-  onRatingClicked?(rating: BookingRating): void;
-  value?: BookingRating;
+  onRatingClicked?(rating: ReviewRating): void;
+  value?: ReviewRating;
 };
 
 function RatingSelector({ onRatingClicked, value = 5 }: Props) {
@@ -17,7 +17,7 @@ function RatingSelector({ onRatingClicked, value = 5 }: Props) {
             <button
               key={rating}
               type="button"
-              onClick={() => onRatingClicked && onRatingClicked(rating as BookingRating)}
+              onClick={() => onRatingClicked && onRatingClicked(rating as ReviewRating)}
             >
               <img
                 tw="w-[30px] h-[30px]"

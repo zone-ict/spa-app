@@ -1,11 +1,11 @@
 import { FormikConfig, useFormik } from 'formik';
 import 'twin.macro';
-import { BookingRating } from '../../constants/types.constant';
 import { TranslatorType } from '../../hooks/useTranslator/useTranslator.hook';
+import { ReviewRating } from '../../models/Review.model';
 import { Button, RatingSelector, Text, TextArea } from '../atoms';
 
 export type ReviewBookingFormSchema = {
-  rating: BookingRating;
+  rating: ReviewRating;
   comment: string;
 };
 
@@ -17,7 +17,7 @@ type Props = {
 function ReviewBookingForm({ formConfig, translator }: Props) {
   const { handleSubmit, values, setFieldValue, handleChange } = useFormik(formConfig);
 
-  const handleRatingChange = (rating: BookingRating) => {
+  const handleRatingChange = (rating: ReviewRating) => {
     setFieldValue('rating', rating).catch(() => {});
   };
 
