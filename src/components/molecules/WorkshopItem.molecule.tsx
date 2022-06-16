@@ -11,7 +11,7 @@ function WorkshopItem({ data, onClick = () => {} }: Props) {
   return (
     <button type="button" tw="space-y-2 inline-flex flex-col" onClick={() => onClick(data.uid)}>
       <img
-        tw="h-[20vh] w-full object-cover"
+        tw="h-[20vh] w-full object-cover bg-gray-200"
         src={data.main_photo_url}
         alt={`Workshop ${data.name}`}
       />

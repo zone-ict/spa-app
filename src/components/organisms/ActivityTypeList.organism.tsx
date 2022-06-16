@@ -6,7 +6,7 @@ import { ActivityType } from '../../models/Activity.model';
 import { ActivityTypeItem } from '../molecules';
 
 type Props = {
-  data: ActivityType[];
+  data?: ActivityType[];
   selectedId?: string;
   onClickItem?(id: string): void;
 };
@@ -25,7 +25,7 @@ export default function ActivityTypeList({ data, selectedId = '', onClickItem = 
             <Skeleton tw="h-[60px]" />
           </>
         )}
-        {data.map((item) => (
+        {data?.map((item) => (
           <ActivityTypeItem
             key={`${item.name}-${item.price}`}
             name={item.name}

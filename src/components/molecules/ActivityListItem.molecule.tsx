@@ -5,7 +5,7 @@ import { ReviewRating } from '../../models/Review.model';
 import { Rating, Text } from '../atoms';
 
 const Container = tw.div`flex items-center space-x-4 cursor-pointer`;
-const Thumbnail = tw.img`w-20 flex-shrink-0 h-[70px] object-cover`;
+const Thumbnail = tw.img`w-20 flex-shrink-0 h-[70px] object-cover bg-gray-200`;
 const Icon = tw(ChevronRightIcon)`w-6 h-6 flex-shrink-0 text-gray-400`;
 
 type Props = {

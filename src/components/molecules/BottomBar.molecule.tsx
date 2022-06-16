@@ -23,8 +23,6 @@ const FooterContainer = styled.footer(() => [
 
 const BottomBarItem = styled.button(() => [tw`inline-flex flex-col items-center`]);
 
-const BottomBarIcon = styled.img(() => [tw`w-6 h-6`]);
-
 const BottomBarText = styled(Text.Label)<{ inactive?: boolean }>(({ inactive }) => [
   inactive && tw`text-gray-400`,
 ]);

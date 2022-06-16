@@ -8,7 +8,7 @@ import useWorkshopDetailsViewModel from './WorkshopDetails.viewModel';
 
 const Gallery = tw.div`flex items-center space-x-2 overflow-x-auto`;
 const Video = tw.video`h-[200px] bg-black`;
-const Image = tw.img`h-[200px]`;
+const Image = tw.img`h-[200px] bg-gray-200`;
 const Content = tw.div`flex flex-col p-4 pb-8 space-y-6`;
 const Description = tw(Text.Small)`text-gray-500`;
 const Contact = tw.div`flex flex-col`;

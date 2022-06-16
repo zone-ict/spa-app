@@ -14,7 +14,7 @@ type ActivityInfoProps = {
 function ActivityInfo({ photo_url, name, workshopName }: ActivityInfoProps) {
   return (
     <div tw="flex space-x-4">
-      <img tw="w-[80px] object-cover" src={photo_url} alt="Activity" />
+      <img tw="w-[80px] object-cover bg-gray-200" src={photo_url} alt="Activity" />
       <div tw="w-3/4 space-y-2">
         <Text.Small tw="display[-webkit-box] -webkit-line-clamp[2] -webkit-box-orient[vertical] overflow-hidden">
           {name}

@@ -8,7 +8,7 @@ import useActivityDetailsViewModel from './ActivityDetails.viewModel';
 
 const Gallery = tw.div`flex items-center space-x-2 overflow-x-auto`;
 const Video = tw.video`h-[200px] bg-black`;
-const Image = tw.img`h-[200px]`;
+const Image = tw.img`h-[200px] bg-gray-200`;
 const Content = tw.div`flex flex-col p-4 pb-[92px] space-y-6 relative`;
 const Description = tw(Text.Small)`text-gray-500`;
 const FooterButtonContainer = tw.div`fixed bottom-0 w-full max-w-md py-2 px-4 border-t border-t-gray-300 bg-white`;
@@ -24,12 +24,8 @@ function ActivityDetails() {
   } = useActivityDetailsViewModel();
 
   if (activityIsLoading || !activityData) {
-    return <WithTopBar pageTitle="Activity Detail">Loading...</WithTopBar>;
-  }
-
-  if (false) {
     return (
-      <WithTopBar pageTitle="Workshop Detail">
+      <WithTopBar pageTitle="Activity Detail">
         <Skeleton tw="h-[200px]" />
         <Content>
           <Skeleton tw="h-7 w-3/4" />

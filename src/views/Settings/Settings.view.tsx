@@ -9,7 +9,7 @@ import useSettingsViewModel from './Settings.viewModel';
 
 const Content = tw.div`p-4 pt-6 pb-8 flex flex-col space-y-6`;
 const Clickable = tw.div`cursor-pointer`;
-const Avatar = tw.img`w-14 h-14 rounded-full object-cover`;
+const Avatar = tw.img`w-14 h-14 rounded-full object-cover bg-gray-200`;
 const IconContainer = tw.div`w-6 h-6 flex-shrink-0 flex-grow-0 text-gray-400`;
 
 function SettingsItem({
