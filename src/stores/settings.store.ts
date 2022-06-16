@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Availability } from '../../hooks/useTranslator/useTranslator.hook';
-import { getDefaultLang } from '../../utils/helper.util';
+import { Availability } from '../hooks/useTranslator/useTranslator.hook';
+import { getDefaultLang } from '../utils/helper.util';
 
 // #region ACTION PAYLOADS
 

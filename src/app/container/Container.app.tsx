@@ -8,7 +8,15 @@ import store, { persistor } from '../store/store.app';
 import ErrorBoundary from './ErrorBoundary.app';
 
 export default function Container() {
-  const [queryClient] = useState(new QueryClient());
+  const [queryClient] = useState(
+    new QueryClient({
+      defaultOptions: {
+        queries: {
+          staleTime: 1000 * 60 * 60,
+        },
+      },
+    }),
+  );
 
   return (
     <ErrorBoundary>

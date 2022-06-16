@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import tw, { styled } from 'twin.macro';
@@ -25,15 +25,15 @@ const DayPickerContainer = styled.div`
   }
 
   .rdp-caption {
-    ${tw`text-base bg-gray-100 pl-4`}
+    ${tw`pl-4 text-base bg-gray-100`}
   }
 
   .rdp-caption_label {
-    ${tw`text-sm m-0 p-0`}
+    ${tw`p-0 m-0 text-sm`}
   }
 
   .rdp-table {
-    ${tw`table-fixed w-full max-w-full`}
+    ${tw`w-full max-w-full table-fixed`}
   }
 
   .rdp-head_cell {
@@ -41,7 +41,7 @@ const DayPickerContainer = styled.div`
   }
 
   .rdp-day {
-    ${tw`text-xs text-gray-900 rounded-none font-medium mx-auto`}
+    ${tw`mx-auto text-xs font-medium text-gray-900 rounded-none`}
 
     :hover {
       ${tw`bg-gray-100`}
@@ -65,12 +65,22 @@ const DayPickerContainer = styled.div`
   }
 
   .rdp-outline {
-    ${tw`border-none bg-transparent`}
+    ${tw`bg-transparent border-none`}
   }
 `;
 
-export default function DatePicker() {
+type Props = {
+  onChange(date: Date): void;
+};
+
+export default function DatePicker({ onChange }: Props) {
   const [selectedDay, setSelectedDay] = useState<Date>();
+
+  useEffect(() => {
+    if (selectedDay) {
+      onChange(selectedDay);
+    }
+  }, [onChange, selectedDay]);
 
   return (
     <div>

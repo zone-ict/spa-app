@@ -17,17 +17,17 @@ function ActivityList({ onItemClick, data }: Props) {
           <Skeleton tw="h-[70px]" />
         </>
       )}
-      {!!data &&
-        data.map((activity) => (
-          <ActivityListItem
-            key={activity.uid}
-            thumbnail={activity.thumbnail_url}
-            name={activity.name}
-            avgRating={activity.average_rating ?? 0}
-            numRating={activity.ratings_count ?? 0}
-            onClick={onItemClick}
-          />
-        ))}
+      {data?.map((activity) => (
+        <ActivityListItem
+          key={activity.uid}
+          uid={activity.uid}
+          thumbnail={activity.thumbnail_url}
+          name={activity.name}
+          avgRating={activity.average_rating ?? 0}
+          numRating={activity.ratings_count ?? 0}
+          onClick={onItemClick}
+        />
+      ))}
     </div>
   );
 }

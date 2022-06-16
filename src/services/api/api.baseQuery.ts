@@ -11,7 +11,7 @@ import {
 import { Mutex } from 'async-mutex';
 import { RootState } from '../../app/store/store.app';
 import env from '../../configs/env/env.config';
-import { sessionAction } from '../../stores/session/session.store';
+import { sessionAction } from '../../stores/session.store';
 
 export type ApiServicePath = 'api';
 export const apiServicePath: ApiServicePath = 'api';

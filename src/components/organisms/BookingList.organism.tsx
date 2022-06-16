@@ -1,5 +1,6 @@
 import React from 'react';
-import { BookingStatus } from '../../models/Booking.model';
+import fromUnixTime from 'date-fns/fromUnixTime';
+import { Booking } from '../../models/Booking.model';
 import { ReviewRating } from '../../models/Review.model';
 import { formatDate } from '../../utils/helper.util';
 import { Skeleton } from '../atoms';
@@ -7,15 +8,8 @@ import { BookingListItem } from '../molecules';
 import 'twin.macro';
 
 type Props = {
-  // TODO: Update this with data from BE
-  data?: {
-    date: string;
-    title: string;
-    location: string;
-    status: BookingStatus;
-    rating?: ReviewRating;
-  }[];
-  onItemClick?(): void;
+  data?: Booking[];
+  onItemClick?(id: string): void;
 };
 
 function BookingItemSkeleton() {
@@ -30,7 +24,7 @@ function BookingItemSkeleton() {
   );
 }
 
-function BookingList({ data, onItemClick }: Props) {
+function BookingList({ onItemClick = () => {}, data }: Props) {
   return (
     <div>
       {!data && (
@@ -39,17 +33,17 @@ function BookingList({ data, onItemClick }: Props) {
           <BookingItemSkeleton />
         </>
       )}
-      {!!data &&
-        data.map((item) => (
-          <BookingListItem
-            onClick={onItemClick}
-            date={item.date}
-            location={item.location}
-            status={item.status}
-            title={item.title}
-            rating={item.rating}
-          />
-        ))}
+      {data?.map((booking) => (
+        <BookingListItem
+          key={booking.uid}
+          onClick={() => onItemClick(booking.uid)}
+          date={formatDate(fromUnixTime(booking.activity_date))}
+          location={booking.workshop_name}
+          status={booking.status}
+          title={booking.activity_name}
+          rating={(booking.review_rating as ReviewRating) ?? undefined}
+        />
+      ))}
     </div>
   );
 }
