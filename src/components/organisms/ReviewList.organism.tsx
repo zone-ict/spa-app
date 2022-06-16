@@ -2,7 +2,6 @@ import { StarIcon } from '@heroicons/react/solid';
 import React from 'react';
 import tw from 'twin.macro';
 import { ReviewRating } from '../../models/Review.model';
-import { formatDate } from '../../utils/helper.util';
 import { Skeleton, Text } from '../atoms';
 import { ReviewItem } from '../molecules';
 
@@ -45,7 +44,7 @@ export default function ReviewList({ data }: Props) {
       )}
       {!!data &&
         data.map((item) => (
-          <ReviewItem date={formatDate(item.date)} rating={item.rating} comment={item.comment} />
+          <ReviewItem date={item.date} rating={item.rating} comment={item.comment} />
         ))}
     </div>
   );
