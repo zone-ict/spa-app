@@ -1,4 +1,5 @@
 import { GalleryItem } from './GalleryItem.model';
+import { ReviewRating } from './Review.model';
 
 export interface ActivityType {
   uid: string;
@@ -13,7 +14,11 @@ export interface Activity {
   workshop_uid: string;
   thumbnail_url: string;
   gallery: GalleryItem[];
-  reviews: unknown[];
+  reviews: {
+    date: string;
+    rating: ReviewRating;
+    comment: string;
+  }[];
   activity_types: ActivityType[];
   average_rating?: number;
   ratings_count?: number;

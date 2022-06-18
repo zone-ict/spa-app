@@ -45,6 +45,7 @@ export default function ReviewList({ data }: Props) {
       {data?.map((item) => (
         <ReviewItem date={item.date} rating={item.rating} comment={item.comment} />
       ))}
+      {data?.length === 0 && <Text.Small tw="text-gray-500">No reviews yet.</Text.Small>}
     </div>
   );
 }

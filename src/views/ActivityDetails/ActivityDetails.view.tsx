@@ -71,7 +71,7 @@ function ActivityDetails() {
           onClickItem={(uid) => updateState({ selectedActivityTypeUid: uid })}
         />
         <hr />
-        <ReviewList data={activityData.reviews} />
+        <ReviewList data={activityData.reviews ?? []} />
       </Content>
       <FooterButtonContainer>
         <Button
