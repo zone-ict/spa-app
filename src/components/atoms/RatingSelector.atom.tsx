@@ -1,6 +1,11 @@
-import 'twin.macro';
-import svgs from '../../assets/svgs';
+import { StarIcon } from '@heroicons/react/solid';
+import tw, { styled } from 'twin.macro';
 import { ReviewRating } from '../../models/Review.model';
+
+const Star = styled(StarIcon)<{ isActive?: boolean }>(({ isActive }) => [
+  tw`w-10 h-10 text-gray-200`,
+  isActive && tw`text-yellow-400`,
+]);
 
 type Props = {
   onRatingClicked?(rating: ReviewRating): void;
@@ -19,11 +24,7 @@ function RatingSelector({ onRatingClicked, value = 5 }: Props) {
               type="button"
               onClick={() => onRatingClicked && onRatingClicked(rating as ReviewRating)}
             >
-              <img
-                tw="w-[30px] h-[30px]"
-                src={isActive ? svgs.Star : svgs.StarGray}
-                alt="Rating Item"
-              />
+              <Star isActive={isActive} />
             </button>
           );
         })}

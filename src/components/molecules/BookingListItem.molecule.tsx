@@ -5,6 +5,7 @@ import tw, { styled } from 'twin.macro';
 import assets from '../../assets';
 import { BookingStatus } from '../../models/Booking.model';
 import { ReviewRating } from '../../models/Review.model';
+import { Rating } from '../atoms';
 import Chip from '../atoms/Chip.atom';
 
 // #endregion
@@ -41,37 +42,15 @@ type Props = {
   onClick?(): void;
 };
 
-const mappedText: Record<BookingStatus, string> = {
-  [BookingStatus.Booked]: 'Booked',
-  [BookingStatus.InProgress]: 'In Progress',
-  [BookingStatus.Completed]: 'Completed',
-  [BookingStatus.Cancelled]: 'Cancelled',
-};
-
 // #endregion
 
 // #region MAIN COMPONENT
 
 function BookingListItem({ title, date, location, status, rating, onClick }: Props) {
-  const ratingComponent = useMemo(() => {
-    if (!rating) return undefined;
-
-    const ratings = [];
-    for (let i = 1; i <= 5; i += 1) {
-      if (i <= rating) {
-        ratings.push(<img tw="w-3 h-3" src={assets.svgs.Star} key={i} alt="Yellow Star" />);
-      } else {
-        ratings.push(<img tw="w-3 h-3" src={assets.svgs.StarGray} key={i} alt="Gray Star" />);
-      }
-    }
-
-    return ratings;
-  }, [rating]);
-
   return (
     <Container onClick={onClick}>
       <Title>{title}</Title>
-      {ratingComponent && <RatingContainer>{ratingComponent}</RatingContainer>}
+      {!!rating && <Rating rating={rating} />}
       <InfoContainer>
         <DateLocationContainer>
           <span>{date}</span>
