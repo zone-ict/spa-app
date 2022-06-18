@@ -3,7 +3,7 @@ import isSameDay from 'date-fns/isSameDay';
 import React, { useMemo } from 'react';
 import tw, { styled } from 'twin.macro';
 import images from '../../assets/images';
-import { Button, Text } from '../../components/atoms';
+import { Button, Skeleton, Text } from '../../components/atoms';
 import Chip from '../../components/atoms/Chip.atom';
 import ReviewItem from '../../components/molecules/ReviewItem.molecule';
 import { CancelBookingForm, ReviewBookingForm } from '../../components/organisms';
@@ -131,7 +131,19 @@ function BookingDetails() {
   ]);
 
   if (bookingIsLoading || !bookingData) {
-    return <WithTopBar pageTitle="Booking Detail">{translator.translate('Loading...')}</WithTopBar>;
+    return (
+      <WithTopBar pageTitle="Booking Detail">
+        <Container>
+          <Skeleton tw="h-7" />
+          <Skeleton tw="h-6 w-1/3" />
+          <div tw="flex space-x-4">
+            <Skeleton tw="h-5 w-1/4" />
+            <Skeleton tw="h-5 w-1/2" />
+          </div>
+          <Skeleton tw="h-40" />
+        </Container>
+      </WithTopBar>
+    );
   }
   return (
     <WithTopBar pageTitle="Booking Detail">

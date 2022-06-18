@@ -1,16 +1,23 @@
 import React from 'react';
 import 'twin.macro';
 import { Activity } from '../../models/Activity.model';
+import { Skeleton } from '../atoms';
 import ActivityListItem from '../molecules/ActivityListItem.molecule';
 
 type Props = {
   onItemClick?(id: string): void;
-  data: Activity[];
+  data?: Activity[];
 };
 function ActivityList({ onItemClick, data }: Props) {
   return (
     <div tw="space-y-4">
-      {data.map((activity) => (
+      {!data && (
+        <>
+          <Skeleton tw="h-[70px]" />
+          <Skeleton tw="h-[70px]" />
+        </>
+      )}
+      {data?.map((activity) => (
         <ActivityListItem
           key={activity.uid}
           uid={activity.uid}

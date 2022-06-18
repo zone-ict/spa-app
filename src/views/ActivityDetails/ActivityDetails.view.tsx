@@ -1,5 +1,6 @@
+import React from 'react';
 import tw from 'twin.macro';
-import { Button, Text } from '../../components/atoms';
+import { Button, Skeleton, Text } from '../../components/atoms';
 import { RatingWithAverage } from '../../components/molecules';
 import { ActivityTypeList, ReviewList } from '../../components/organisms';
 import WithTopBar from '../../components/templates/WithTopBar.template';
@@ -23,7 +24,20 @@ function ActivityDetails() {
   } = useActivityDetailsViewModel();
 
   if (activityIsLoading || !activityData) {
-    return <WithTopBar pageTitle="Activity Detail">Loading...</WithTopBar>;
+    return (
+      <WithTopBar pageTitle="Activity Detail">
+        <Skeleton tw="h-[200px]" />
+        <Content>
+          <Skeleton tw="h-7 w-3/4" />
+          <Skeleton tw="h-4" />
+          <Skeleton tw="h-20" />
+          <hr />
+          <ActivityTypeList />
+          <hr />
+          <ReviewList />
+        </Content>
+      </WithTopBar>
+    );
   }
 
   return (
@@ -57,7 +71,7 @@ function ActivityDetails() {
           onClickItem={(uid) => updateState({ selectedActivityTypeUid: uid })}
         />
         <hr />
-        <ReviewList />
+        <ReviewList data={activityData.reviews} />
       </Content>
       <FooterButtonContainer>
         <Button

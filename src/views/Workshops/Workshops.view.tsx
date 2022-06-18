@@ -17,7 +17,7 @@ export default function WorkshopsView() {
       activeMenu={BottomBarMenus.Workshops}
       pageTitle="Workshops"
     >
-      <WorkshopList data={workshopData ?? []} onItemClick={navigateToWorkshopDetails} />
+      <WorkshopList data={workshopData} onItemClick={navigateToWorkshopDetails} />
     </WithTopBottomBar>
   );
 }
