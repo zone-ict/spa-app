@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { AnyAction, Dispatch } from 'redux';
 import { RootState } from '../../app/store/store.app';
+import useAuth from '../../hooks/useAuth/useAuth.hook';
 import useTranslator from '../../hooks/useTranslator/useTranslator.hook';
 import { ActivityType } from '../../models/Activity.model';
 import {
@@ -91,6 +92,7 @@ function useParamsHandler(
 }
 
 export default function useBookingCreateViewModel() {
+  useAuth();
   const navigationHandlers = useNavigationHandlers();
   const dispatch = useDispatch();
   const translator = useTranslator();
@@ -115,8 +117,8 @@ export default function useBookingCreateViewModel() {
   );
 
   return {
-    translator,
     creationData,
+    ...translator,
     ...navigationHandlers,
     ...paramsHandler,
     ...pageState,

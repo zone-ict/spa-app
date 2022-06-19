@@ -9,8 +9,10 @@ import useSettingsViewModel from './Settings.viewModel';
 
 const Content = tw.div`p-4 pt-6 pb-8 flex flex-col space-y-6`;
 const Clickable = tw.div`cursor-pointer`;
-const Avatar = tw.img`w-14 h-14 rounded-full object-cover bg-gray-200`;
+// TODO: Uncomment this when implement user profile picture
+// const Avatar = tw.img`w-14 h-14 rounded-full object-cover bg-gray-200`;
 const IconContainer = tw.div`w-6 h-6 flex-shrink-0 flex-grow-0 text-gray-400`;
+const TextSmall = tw.div`text-sm text-gray-900`;
 
 function SettingsItem({
   icon,
@@ -27,7 +29,7 @@ function SettingsItem({
     <Clickable onClick={onClick} tw="flex items-center space-x-4 py-2">
       <IconContainer>{icon}</IconContainer>
       <Text.Small tw="flex-shrink-0 w-1/3">{label}</Text.Small>
-      <Text.Small tw="flex-auto text-gray-500 text-right">{value}</Text.Small>
+      <TextSmall tw="flex-auto text-gray-500 text-right">{value}</TextSmall>
       <IconContainer>
         <ChevronRightIcon tw="w-full h-full" />
       </IconContainer>
@@ -36,7 +38,15 @@ function SettingsItem({
 }
 
 function WorkshopDetails() {
-  const { navigateToWorkshops, navigateToBookings } = useSettingsViewModel();
+  const {
+    navigateToWorkshops,
+    navigateToBookings,
+    handleLogout,
+    currentUserData,
+    translator,
+    currentLanguage,
+    handleChangeLanguage,
+  } = useSettingsViewModel();
 
   return (
     <WithTopBottomBar
@@ -44,28 +54,42 @@ function WorkshopDetails() {
       onWorkshopsClicked={navigateToWorkshops}
       onBookingsClicked={navigateToBookings}
       activeMenu={BottomBarMenus.Settings}
-      pageTitle="Settings"
+      pageTitle={translator.translate('Settings')}
     >
       <Content>
         <Clickable tw="flex items-center space-x-4">
           {/* <Avatar src="https://via.placeholder.com/300" /> */}
           <div>
-            <Text>Jonathan Doe</Text>
-            <Text.Label tw="text-gray-500">Google account</Text.Label>
+            <Text>{currentUserData.name ?? 'User'}</Text>
+            <Text.Label tw="text-gray-500">
+              {currentUserData.email ?? 'email@domain.com'}
+            </Text.Label>
           </div>
         </Clickable>
         <hr />
-        <SettingsItem icon={<TranslateIcon />} label="Language" value={<LanguageSelect />} />
+        <SettingsItem
+          icon={<TranslateIcon />}
+          label={translator.translate('Language')}
+          value={
+            <LanguageSelect selectedLanguage={currentLanguage} onChange={handleChangeLanguage} />
+          }
+        />
         <hr />
         <div>
-          <SettingsItem icon={<InformationCircleIcon />} label="Privacy Policy" />
-          <SettingsItem icon={<InformationCircleIcon />} label="About this app" />
+          <SettingsItem
+            icon={<InformationCircleIcon />}
+            label={translator.translate('Privacy Policy')}
+          />
+          <SettingsItem
+            icon={<InformationCircleIcon />}
+            label={translator.translate('About this app')}
+          />
         </div>
-        <Clickable tw="flex items-center space-x-4 py-2">
+        <Clickable onClick={handleLogout} tw="flex items-center space-x-4 py-2">
           <IconContainer tw="text-red-500">
             <LogoutIcon />
           </IconContainer>
-          <Text.Small tw="text-red-500 flex-auto">Sign out</Text.Small>
+          <Text.Small tw="text-red-500 flex-auto">{translator.translate('Sign out')}</Text.Small>
         </Clickable>
       </Content>
     </WithTopBottomBar>

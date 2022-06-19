@@ -18,14 +18,14 @@ function ActivityDetails() {
     navigateToCreateBooking,
     activityData,
     activityIsLoading,
-    translator,
+    translate,
     state,
     updateState,
   } = useActivityDetailsViewModel();
 
   if (activityIsLoading || !activityData) {
     return (
-      <WithTopBar pageTitle="Activity Detail">
+      <WithTopBar pageTitle={translate('Activity Detail')}>
         <Skeleton tw="h-[200px]" />
         <Content>
           <Skeleton tw="h-7 w-3/4" />
@@ -41,7 +41,7 @@ function ActivityDetails() {
   }
 
   return (
-    <WithTopBar pageTitle="Activity Detail">
+    <WithTopBar pageTitle={translate('Activity Detail')}>
       <Gallery>
         {activityData.gallery.map((item) => {
           if (item.type === 'VIDEO') {
@@ -49,7 +49,7 @@ function ActivityDetails() {
               // TODO: Replace key with ID later
               <Video key={item.url} controls>
                 <source src={item.url} type="video/mp4" />
-                {translator.translate('Your browser does not support the video tag.')}
+                {translate('Your browser does not support the video tag.')}
               </Video>
             );
           }
@@ -78,7 +78,7 @@ function ActivityDetails() {
           disabled={!state.selectedActivityTypeUid}
           onClick={() => navigateToCreateBooking(activityData.uid)}
         >
-          {translator.translate('Book a Schedule')}
+          {translate('Book a Schedule')}
         </Button>
       </FooterButtonContainer>
     </WithTopBar>

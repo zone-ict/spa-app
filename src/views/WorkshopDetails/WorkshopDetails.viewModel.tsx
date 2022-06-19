@@ -1,6 +1,8 @@
 import { useCallback } from 'react';
 import { useQuery } from 'react-query';
 import { useLocation, useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth/useAuth.hook';
+import useTranslator from '../../hooks/useTranslator/useTranslator.hook';
 import { Workshop } from '../../models/Workshop.model';
 import { getWorkshopDetail } from '../../services/firebase/collections/workshops.collection';
 import ActivityDetailsRoute from '../ActivityDetails/ActivityDetails.route';
@@ -52,8 +54,10 @@ function useNavigationHandlers(workshopData: Workshop | undefined) {
 }
 
 export default function useWorkshopDetailsViewModel() {
+  useAuth();
+  const translator = useTranslator();
   const data = useData();
   const navigationHandlers = useNavigationHandlers(data.workshopData);
 
-  return { ...navigationHandlers, ...data };
+  return { ...navigationHandlers, ...data, translate: translator.translate };
 }

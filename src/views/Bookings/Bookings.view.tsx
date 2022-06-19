@@ -10,6 +10,7 @@ function Bookings() {
     navigateToBookingDetails,
     bookingsData,
     bookingsIsLoading,
+    translate,
   } = useBookingsViewModel();
 
   if (!bookingsData || bookingsIsLoading) {
@@ -17,7 +18,7 @@ function Bookings() {
       onWorkshopsClicked={navigateToWorkshops}
       onSettingsClicked={navigateToSettings}
       hideBackButton
-      pageTitle="My Bookings"
+      pageTitle={translate('My Bookings')}
       activeMenu={BottomBarMenus.Bookings}
     >
       <h1>Loading...</h1>
@@ -29,7 +30,7 @@ function Bookings() {
       onWorkshopsClicked={navigateToWorkshops}
       onSettingsClicked={navigateToSettings}
       hideBackButton
-      pageTitle="My Bookings"
+      pageTitle={translate('My Bookings')}
       activeMenu={BottomBarMenus.Bookings}
     >
       <BookingList data={bookingsData ?? []} onItemClick={navigateToBookingDetails} />

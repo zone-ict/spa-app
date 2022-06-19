@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { number, object, string } from 'yup';
 import { CancelBookingFormSchema } from '../../components/organisms/CancelBookingForm.organism';
 import { ReviewBookingFormSchema } from '../../components/organisms/ReviewBookingForm.organism';
+import useAuth from '../../hooks/useAuth/useAuth.hook';
 import useTranslator from '../../hooks/useTranslator/useTranslator.hook';
 import { Booking } from '../../models/Booking.model';
 import {
@@ -163,6 +164,8 @@ function useReviewBookingFormHandler(onSubmit: (values: ReviewBookingFormSchema)
 // #endregion
 
 export default function useBookingDetailsViewModel() {
+  useAuth();
+
   const { pathname } = useLocation();
 
   const bookingId = pathname.split('/')[2];

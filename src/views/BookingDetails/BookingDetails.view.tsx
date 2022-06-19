@@ -30,6 +30,8 @@ function BookingDetails() {
     bookingIsLoading,
   } = useBookingDetailsViewModel();
 
+  const { translate } = translator;
+
   const bottomBar = useMemo(() => {
     if (!bookingData || bookingIsLoading) {
       return null;
@@ -48,7 +50,7 @@ function BookingDetails() {
       return (
         <>
           <Divider />
-          <Text.HeadingFive>{translator.translate('Your review')}</Text.HeadingFive>
+          <Text.HeadingFive>{translate('Your review')}</Text.HeadingFive>
           <ReviewItem
             date={formatDate(fromUnixTime(bookingData.activity_date))}
             rating={bookingData.review_rating as ReviewRating}
@@ -102,7 +104,7 @@ function BookingDetails() {
               onClick={() => updateState({ isCancelling: true })}
               type="button"
             >
-              Cancel Booking
+              {translator.translate('Cancel Booking')}
             </Button>
             {/* TODO: Add conditional here on booking date */}
             {isSameDay(new Date(), fromUnixTime(bookingData.activity_date)) && (
@@ -126,13 +128,14 @@ function BookingDetails() {
     reviewBookingFormHandler,
     state.isCancelling,
     state.isReviewing,
+    translate,
     translator,
     updateState,
   ]);
 
   if (bookingIsLoading || !bookingData) {
     return (
-      <WithTopBar pageTitle="Booking Detail">
+      <WithTopBar pageTitle={translate('Booking Detail')}>
         <Container>
           <Skeleton tw="h-7" />
           <Skeleton tw="h-6 w-1/3" />
@@ -146,7 +149,7 @@ function BookingDetails() {
     );
   }
   return (
-    <WithTopBar pageTitle="Booking Detail">
+    <WithTopBar pageTitle={translate('Booking Detail')}>
       <Container>
         <Text.HeadingFour>{bookingData.activity_name}</Text.HeadingFour>
         <Text>{bookingData.workshop_name}</Text>
