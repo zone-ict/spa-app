@@ -3,6 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth/useAuth.hook';
 import useTranslator from '../../hooks/useTranslator/useTranslator.hook';
 import { Activity } from '../../models/Activity.model';
 import { getActivityByUid } from '../../services/firebase/collections/activities.collection';
@@ -80,6 +81,7 @@ function useNavigationHandlers(data: Activity | undefined, state: PageState) {
 }
 
 export default function useActivityDetailsViewModel() {
+  useAuth();
   const pageState = usePageState();
   const data = useData();
   const navigationHandlers = useNavigationHandlers(data.activityData, pageState.state);
@@ -89,6 +91,6 @@ export default function useActivityDetailsViewModel() {
     ...pageState,
     ...data,
     ...navigationHandlers,
-    translator,
+    ...translator,
   };
 }

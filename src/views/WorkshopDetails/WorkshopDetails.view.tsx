@@ -36,12 +36,19 @@ function ContactItem({
 }
 
 function WorkshopDetails() {
-  const { goToMaps, callWorkshop, goToLink, goToActivityDetail, workshopData, workshopIsLoading } =
-    useWorkshopDetailsViewModel();
+  const {
+    goToMaps,
+    callWorkshop,
+    goToLink,
+    goToActivityDetail,
+    workshopData,
+    workshopIsLoading,
+    translate,
+  } = useWorkshopDetailsViewModel();
 
   if (workshopIsLoading || !workshopData) {
     return (
-      <WithTopBar pageTitle="Workshop Detail">
+      <WithTopBar pageTitle={translate('Workshop Detail')}>
         <Skeleton tw="h-[200px]" />
         <Content>
           <Skeleton tw="h-7 w-3/4" />
@@ -58,7 +65,7 @@ function WorkshopDetails() {
             />
           </Contact>
           <hr />
-          <Text.HeadingFive>Activities</Text.HeadingFive>
+          <Text.HeadingFive>{}</Text.HeadingFive>
           <ActivityList />
         </Content>
       </WithTopBar>
@@ -66,15 +73,14 @@ function WorkshopDetails() {
   }
 
   return (
-    <WithTopBar pageTitle="Workshop Detail">
+    <WithTopBar pageTitle={translate('Workshop Detail')}>
       <Gallery>
-        {/** TODO: replace dummy data */}
         {workshopData.gallery.map((item) => {
           if (item.type === 'VIDEO') {
             return (
               <Video controls key={item.url}>
                 <source src={item.url} type="video/mp4" />
-                Your browser does not support the video tag.
+                {translate('Your browser does not support the video tag.')}
               </Video>
             );
           }
@@ -105,7 +111,7 @@ function WorkshopDetails() {
           />
         </Contact>
         <hr />
-        <Text.HeadingFive>Activities</Text.HeadingFive>
+        <Text.HeadingFive>{translate('Activities')}</Text.HeadingFive>
         <ActivityList data={workshopData.activities} onItemClick={goToActivityDetail} />
       </Content>
     </WithTopBar>

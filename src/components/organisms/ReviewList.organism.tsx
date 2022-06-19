@@ -1,6 +1,7 @@
-import React from 'react';
 import { StarIcon } from '@heroicons/react/solid';
+import React from 'react';
 import tw from 'twin.macro';
+import useTranslator from '../../hooks/useTranslator/useTranslator.hook';
 import { ReviewRating } from '../../models/Review.model';
 import { Skeleton, Text } from '../atoms';
 import { ReviewItem } from '../molecules';
@@ -33,9 +34,10 @@ function SkeletonItem() {
 }
 
 export default function ReviewList({ data }: Props) {
+  const translator = useTranslator();
   return (
     <div tw="space-y-6">
-      <Text.HeadingFive>Reviews</Text.HeadingFive>
+      <Text.HeadingFive>{translator.translate('Reviews')}</Text.HeadingFive>
       {!data && (
         <>
           <SkeletonItem />
@@ -45,7 +47,9 @@ export default function ReviewList({ data }: Props) {
       {data?.map((item) => (
         <ReviewItem date={item.date} rating={item.rating} comment={item.comment} />
       ))}
-      {data?.length === 0 && <Text.Small tw="text-gray-500">No reviews yet.</Text.Small>}
+      {data?.length === 0 && (
+        <Text.Small tw="text-gray-500">{translator.translate('No reviews yet.')}</Text.Small>
+      )}
     </div>
   );
 }

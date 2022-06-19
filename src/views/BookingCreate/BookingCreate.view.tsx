@@ -29,7 +29,7 @@ export default function BookingCreate() {
   const {
     creationData,
     navigateToHome,
-    translator,
+    translate,
     handleActivityTypeChange,
     updateState,
     isValid,
@@ -39,17 +39,17 @@ export default function BookingCreate() {
 
   if (!creationData) {
     return (
-      <WithTopBar pageTitle="Create Booking">
-        <h1>{translator.translate('Invalid app state')}</h1>
+      <WithTopBar pageTitle={translate('Create Booking')}>
+        <h1>{translate('Invalid app state')}</h1>
         <button type="button" onClick={navigateToHome}>
-          {translator.translate('Go back to main page')}
+          {translate('Go back to main page')}
         </button>
       </WithTopBar>
     );
   }
 
   return (
-    <WithTopBar pageTitle="Create Booking">
+    <WithTopBar pageTitle={translate('Create Booking')}>
       <div tw="p-4 space-y-6 pb-8">
         <ActivityInfo
           name={creationData.activityName}
@@ -74,7 +74,7 @@ export default function BookingCreate() {
             })
           }
         >
-          {translator.translate('Confirm Booking')}
+          {translate('Confirm Booking')}
         </Button>
       </div>
     </WithTopBar>

@@ -1,41 +1,66 @@
 import { Listbox } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/solid';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import tw from 'twin.macro';
-import { Text, Transition } from '../atoms';
+import { Availability } from '../../hooks/useTranslator/useTranslator.hook';
+import { Transition } from '../atoms';
 
-const dummyLanguages = [
-  { name: 'English', code: 'en' },
-  { name: 'Bahasa Indonesia', code: 'id' },
-];
+const availableLanguages: Record<Availability, { name: string; code: Availability }> = {
+  en: {
+    name: 'English',
+    code: Availability.en,
+  },
+  id: {
+    name: 'Indonesia',
+    code: Availability.id,
+  },
+  jp: {
+    name: '日本',
+    code: Availability.jp,
+  },
+};
 
-export default function LanguageSelect() {
-  // TODO: Update this to use data from FireStore
-  const [selectedIndex, setSelectedIndex] = useState(0);
+const availableLanguagesArray = Object.values(availableLanguages);
+
+const Text = tw.div`text-sm text-gray-900`;
+
+type Props = {
+  selectedLanguage: Availability;
+  onChange: (language: Availability) => void;
+};
+
+export default function LanguageSelect({ selectedLanguage, onChange }: Props) {
+  const [selectedIndex, setSelectedIndex] = useState(
+    availableLanguagesArray.findIndex(({ code }) => code === selectedLanguage),
+  );
+
+  useEffect(() => {
+    if (selectedIndex != null) {
+      onChange(availableLanguagesArray[selectedIndex].code);
+    }
+  }, [onChange, selectedIndex]);
 
   return (
     <div>
       <Listbox value={selectedIndex} onChange={setSelectedIndex}>
         <div tw="relative">
           <Listbox.Button tw="relative">
-            <Text.Small tw="truncate text-gray-500">
-              {dummyLanguages[selectedIndex].name}
-            </Text.Small>
+            <Text tw="truncate text-gray-500">{availableLanguages[selectedLanguage].name}</Text>
           </Listbox.Button>
           <Transition
             as={Fragment}
-            enter={tw`transition ease-in duration-200`}
+            enter={tw`transition duration-200 ease-in`}
             enterFrom={tw`opacity-0`}
             enterTo={tw`opacity-100`}
-            leave={tw`transition ease-in duration-200`}
+            leave={tw`transition duration-200 ease-in`}
             leaveFrom={tw`opacity-100`}
             leaveTo={tw`opacity-0`}
           >
             <Listbox.Options tw="absolute z-10 py-1 max-h-60 w-[calc(100% + 40px)] text-left overflow-auto bg-white text-sm drop-shadow-lg focus:outline-none">
-              {dummyLanguages.map((item, index) => (
+              {availableLanguagesArray.map((item, index) => (
                 <Listbox.Option
                   css={[
-                    tw`relative cursor-default select-none py-2 pl-10 pr-4 text-gray-900`,
+                    tw`relative py-2 pl-10 pr-4 text-gray-900 cursor-default select-none`,
                     selectedIndex === index && tw`bg-gray-200`,
                   ]}
                   key={`${item.name}-${index.toString()}`}
@@ -44,7 +69,7 @@ export default function LanguageSelect() {
                   {(props) => (
                     <>
                       <span
-                        css={[tw`block truncate font-normal`, props.selected && tw`font-medium`]}
+                        css={[tw`block font-normal truncate`, props.selected && tw`font-medium`]}
                       >
                         {item.name}
                       </span>

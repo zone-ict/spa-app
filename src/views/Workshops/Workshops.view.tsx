@@ -6,8 +6,13 @@ import WithTopBottomBar from '../../components/templates/WithTopBottomBar.templa
 import useWorkshopsViewModel from './Workshops.viewModel';
 
 export default function WorkshopsView() {
-  const { navigateToBookings, navigateToWorkshopDetails, workshopData, navigateToSettings } =
-    useWorkshopsViewModel();
+  const {
+    navigateToBookings,
+    navigateToWorkshopDetails,
+    workshopData,
+    navigateToSettings,
+    translate,
+  } = useWorkshopsViewModel();
 
   return (
     <WithTopBottomBar
@@ -15,7 +20,7 @@ export default function WorkshopsView() {
       onBookingsClicked={navigateToBookings}
       onSettingsClicked={navigateToSettings}
       activeMenu={BottomBarMenus.Workshops}
-      pageTitle="Workshops"
+      pageTitle={translate('Workshops')}
     >
       <WorkshopList data={workshopData} onItemClick={navigateToWorkshopDetails} />
     </WithTopBottomBar>

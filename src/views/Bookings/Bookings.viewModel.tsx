@@ -2,6 +2,8 @@ import { useCallback, useMemo } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth/useAuth.hook';
+import useTranslator from '../../hooks/useTranslator/useTranslator.hook';
 import { getBookingsByUserUid } from '../../services/firebase/collections/bookings.collection';
 import { fbAuth } from '../../services/firebase/firebase.service';
 import BookingDetailsRoute from '../BookingDetails/BookingDetails.route';
@@ -60,8 +62,10 @@ function useNavigationHandlers() {
 }
 
 export default function useBookingsViewModel() {
+  useAuth();
+  const translator = useTranslator();
   const data = useData();
   const navigationHandlers = useNavigationHandlers();
 
-  return { ...navigationHandlers, ...data };
+  return { ...navigationHandlers, ...data, ...translator };
 }

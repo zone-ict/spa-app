@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth/useAuth.hook';
+import useTranslator from '../../hooks/useTranslator/useTranslator.hook';
 import { getWorkshops } from '../../services/firebase/collections/workshops.collection';
 import BookingsRoute from '../Bookings/Bookings.route';
 import SettingsRoute from '../Settings/Settings.route';
@@ -39,8 +40,9 @@ function useWorkshopsData() {
 
 export default function useWorkshopsViewModel() {
   useAuth();
+  const translator = useTranslator();
   const navigationHandlers = useNavigationHandlers();
   const workshopData = useWorkshopsData();
 
-  return { ...navigationHandlers, ...workshopData };
+  return { ...navigationHandlers, ...workshopData, ...translator };
 }

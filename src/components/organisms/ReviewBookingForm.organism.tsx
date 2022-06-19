@@ -34,7 +34,7 @@ function ReviewBookingForm({ formConfig, translator }: Props) {
         name="comment"
         onChange={handleChange}
       />
-      <Button type="submit">Submit Review</Button>
+      <Button type="submit">{translator.translate('Submit Review')}</Button>
     </form>
   );
 }

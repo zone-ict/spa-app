@@ -59,7 +59,7 @@ function CancelBookingForm({ formConfig, translator }: Props) {
               setIsOtherSelected(true);
               setFieldValue('reason', '').catch(() => {});
             }}
-            label="Other"
+            label={translator.translate('Other')}
           />
         </div>
         {isOtherSelected && (

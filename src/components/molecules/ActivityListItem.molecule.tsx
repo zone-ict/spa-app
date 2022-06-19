@@ -1,6 +1,7 @@
 import { ChevronRightIcon } from '@heroicons/react/solid';
 import React from 'react';
 import tw from 'twin.macro';
+import useTranslator from '../../hooks/useTranslator/useTranslator.hook';
 import { ReviewRating } from '../../models/Review.model';
 import { Rating, Text } from '../atoms';
 
@@ -25,6 +26,8 @@ function ActivityListItem({
   uid,
   onClick = () => {},
 }: Props) {
+  const translator = useTranslator();
+
   return (
     // TODO: Pass id here
     <Container onClick={() => onClick(uid)}>
@@ -36,7 +39,9 @@ function ActivityListItem({
             rating={avgRating == null ? undefined : (Math.floor(avgRating) as ReviewRating)}
           />
           <Text.Label tw="text-gray-500">
-            {avgRating ? `${avgRating} (${numRating ?? 0})` : 'No ratings yet'}
+            {avgRating
+              ? `${avgRating} (${numRating ?? 0})`
+              : translator.translate('No ratings yet')}
           </Text.Label>
         </div>
       </div>
